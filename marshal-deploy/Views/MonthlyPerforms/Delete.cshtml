@@ -1,0 +1,200 @@
+﻿@model marshal_deploy.Models.MonthlyPerform
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MonthlyPerform</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cluster.ClusterName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cluster.ClusterName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonthlyTarget.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonthlyTarget.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift.DeviceShiftCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shift.DeviceShiftCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonthlyZW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonthlyZW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonthlyUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonthlyUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectedZW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectedZW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectedUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectedUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerformanceZW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerformanceZW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerformanceUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerformanceUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Average)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Average)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Audd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Audd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Audu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Audu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Audp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Audp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lu_Audd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lu_Audd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lu_Audu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lu_Audu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lu_Audp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lu_Audp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

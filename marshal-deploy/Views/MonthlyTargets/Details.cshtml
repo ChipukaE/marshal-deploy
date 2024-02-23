@@ -1,0 +1,77 @@
+﻿@model IEnumerable<marshal_deploy.Models.MonthlyTarget>
+@{ ViewBag.Title = "MonthlyTarget Details"; }
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">MonthlyTarget Details</h5>
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+                    <a class="list-icons-item" data-action="reload"></a>
+                    <a class="list-icons-item" data-action="remove"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MonthlyTarget details table -->
+        <table class="table datatable-responsive">
+            <thead>
+                <tr>
+                    
+                    <th>UserId</th>
+                    <th>MonthlyZW</th>
+                    <th>MonthlyUSD</th>
+                    <th>IsDeleted</th>
+                    <th>IsActive</th>
+                    <th>CreatedAt</th>
+                    <th>UpdatedAt</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var monthlyTarget in Model)
+                {
+                    <tr>
+                       
+                        <td>@Html.DisplayFor(model => monthlyTarget.UserId)</td>
+                        <td>@Html.DisplayFor(model => monthlyTarget.MonthlyZW)</td>
+                        <td>@Html.DisplayFor(model => monthlyTarget.MonthlyUSD)</td>
+                        <td>@Html.DisplayFor(model => monthlyTarget.IsDeleted)</td>
+                        <td>@Html.DisplayFor(model => monthlyTarget.IsActive)</td>
+                        <td>@Html.DisplayFor(model => monthlyTarget.CreatedAt)</td>
+                        <td>@Html.DisplayFor(model => monthlyTarget.UpdatedAt)</td>
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i>PDF</a>
+                                        <a href="#" class="dropdown-item"><i class="icon-file-excel"></i>CSV</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!-- /MonthlyTarget details table -->
+    </div>
+    <!-- /card -->
+</div>
+<!-- /content area -->
+
+@section Scripts { @Scripts.Render("~/bundles/jqueryval")
+
+<script src="~/Content/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script src="~/Content/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+<script src="~/Content/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+
+<script src="~/Content/global_assets/js/demo_pages/datatables_responsive.js"></script>
+}
+

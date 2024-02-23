@@ -1,0 +1,72 @@
+﻿@model IEnumerable<marshal_deploy.Models.DailyTarget>
+@{ ViewBag.Title = "Daily Target Details"; }
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">Daily Target Details</h5>
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+                    <a class="list-icons-item" data-action="reload"></a>
+                    <a class="list-icons-item" data-action="remove"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Target details table -->
+        <table class="table datatable-responsive">
+            <thead>
+                <tr>
+                    <th>ShiftId</th>
+                    <th>UserId</th>
+                    <th>TargetZW</th>
+                    <th>TargetUSD</th>
+                    <th>IsDeleted</th>
+                    <th>IsActive</th>
+                    <th>CreatedAt</th>
+                    <th>UpdatedAt</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dailyTarget in Model)
+                {
+                    <tr>
+                       <td>@Html.DisplayFor(model => dailyTarget.ShiftId)</td>
+                        <td>@Html.DisplayFor(model => dailyTarget.UserId)</td>
+                        <td>@Html.DisplayFor(model => dailyTarget.TargetZW)</td>
+                        <td>@Html.DisplayFor(model => dailyTarget.TargetUSD)</td>
+                        <td>@Html.DisplayFor(model => dailyTarget.IsDeleted)</td>
+                        <td>@Html.DisplayFor(model => dailyTarget.IsActive)</td>
+                        <td>@Html.DisplayFor(model => dailyTarget.CreatedAt)</td>
+                        <td>@Html.DisplayFor(model => dailyTarget.UpdatedAt)</td>
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!-- /Daily Target details table -->
+    </div>
+    <!-- /card -->
+</div>
+<!-- /content area -->
+
+@section Scripts { @Scripts.Render("~/bundles/jqueryval")
+
+<script src="~/Content/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script src="~/Content/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+<script src="~/Content/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+
+<script src="~/Content/global_assets/js/demo_pages/datatables_responsive.js"></script>
+}
+

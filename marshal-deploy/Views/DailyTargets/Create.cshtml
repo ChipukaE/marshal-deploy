@@ -1,0 +1,129 @@
+﻿@model marshal_deploy.Models.DailyTarget 
+    @{ ViewBag.Title = "Create"; }
+
+<div class="content">
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h6 class="card-title text-brown-800 border-bottom-2">@ViewBag.Title</h6>
+        </div>
+
+        <div class="card-body">
+            <form action="/DailyTargets/Create" method="post" data-fouc>
+                @Html.AntiForgeryToken() @Html.HiddenFor(x => x.CreatedAt)
+                @Html.HiddenFor(x => x.UpdatedAt) @Html.HiddenFor(x => x.IsDeleted)
+                @Html.HiddenFor(x => x.IsActive) @Html.HiddenFor(x => x.Audd)
+                @Html.HiddenFor(x => x.Audp) @Html.HiddenFor(x => x.Audu)
+                @Html.HiddenFor(x => x.lu_Audd) @Html.HiddenFor(x => x.lu_Audp)
+                @Html.HiddenFor(x => x.lu_Audu)
+
+                <fieldset>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            @Html.LabelFor(model => model.ShiftId, "ShiftId", htmlAttributes:
+                            new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("ShiftId", ViewBag.ShiftId as SelectList,
+                                htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ShiftId, "", new
+                                {
+                                @class = "text-danger"
+                                })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-4">
+                            @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes:
+                            new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("UserId", ViewBag.UserId as SelectList,
+                                htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UserId, "", new
+                                {
+                                @class = "text-danger"
+                                })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-4">
+                            @Html.LabelFor(model => model.TargetZW, htmlAttributes: new
+                            {
+                            @class = "control-label col-md-6"
+                            })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TargetZW, new
+                                {
+                                    htmlAttributes =
+                                new { @class = "form-control" }
+                                })
+                                @Html.ValidationMessageFor(model => model.TargetZW, "", new
+                                {
+                                @class = "text-danger"
+                                })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-4">
+                            @Html.LabelFor(model => model.TargetUSD, htmlAttributes: new
+                            {
+                            @class = "control-label col-md-6"
+                            })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TargetUSD, new
+                                {
+                                    htmlAttributes =
+                                new { @class = "form-control" }
+                                })
+                                @Html.ValidationMessageFor(model => model.TargetUSD, "", new
+                                {
+                                @class = "text-danger"
+                                })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success ml-3">
+                                Create <i class="icon-paperplane ml-2"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger ml-3">
+                                @Html.ActionLink("Cancel", "Index")
+                                <i class="icon-paperplane ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ShiftId').select2({
+                theme: "classic",
+            });
+            $('#UserId').select2({
+                theme: "classic",
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(document).ready(function () {
+                console.log("haya");
+                $('#ShiftId').change(function () {
+                    var selectedShiftId = $(this).val();
+                    console.log(selectedShiftId);
+                    getUserId(selectedShiftId);
+                });
+            })
+        });
+    </script>
+}

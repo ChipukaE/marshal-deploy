@@ -1,0 +1,344 @@
+﻿@model marshal_deploy.Models.Shift
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Shift</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Precinct.PrecinctName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precinct.PrecinctName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceShiftCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceShiftCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TerminalID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TerminalID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.start_datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.start_datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.end_datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.end_datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsOpen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsOpen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticketissued_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticketissued_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Epayments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Epayments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_arrears)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_arrears)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_prepaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_prepaid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShiftDiffCodeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShiftDiffCodeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShiftDifference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShiftDifference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Audd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Audd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Audu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Audu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Audp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Audp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lu_Audd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lu_Audd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lu_Audu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lu_Audu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lu_Audp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lu_Audp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCollectedUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCollectedUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCollectedZW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCollectedZW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCountedZW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCountedZW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCountedUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCountedUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeclaredVarianceZW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeclaredVarianceZW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeclaredVarianceUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeclaredVarianceUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashupVarianceZW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashupVarianceZW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashupVarianceUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashupVarianceUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashupZWD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashupZWD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashupUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashupUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cashier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cashier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashupAudd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashupAudd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastConnection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastConnection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectedEnforcementZW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectedEnforcementZW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectedEnforcementUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectedEnforcementUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<marshal_deploy.Models.MonthlyPerform>
+@{ ViewBag.Title = "MonthlyPerform"; }
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">MonthlyPerform</h5>
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+                    <a class="list-icons-item" data-action="reload"></a>
+                    <a class="list-icons-item" data-action="remove"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MonthlyPerform table -->
+        <table class="table datatable-responsive">
+            <thead>
+                <tr>
+                    <th>ClusterName</th>
+                    <th>UserId</th>
+                    <th>MonthlyZW</th>
+                    <th>MonthlyUSD</th>
+                    <th>CollectedZW</th>
+                    <th>CollectedUSD</th>
+                    <th>PerformanceZW</th>
+                    <th>PerformanceUSD</th>
+                    <th>Average</th>
+                    <th>Rating</th>
+                    <th>IsDeleted</th>
+                    <th>IsActive</th>
+                    <th>CreatedAt</th>
+                    <th>UpdatedAt</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var monthlyPerform in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => monthlyPerform.Cluster.ClusterName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => monthlyPerform.MonthlyTarget.UserId)
+                        </td>
+                       
+                        <td>@Html.DisplayFor(model => monthlyPerform.MonthlyZW)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.MonthlyUSD)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.CollectedZW)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.CollectedUSD)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.PerformanceZW)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.PerformanceUSD)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.Average)</td>
+
+                        <td>@Html.DisplayFor(model => monthlyPerform.Rating)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.IsDeleted)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.IsActive)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.CreatedAt)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.UpdatedAt)</td>
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i>PDF</a>
+                                        <a href="#" class="dropdown-item"><i class="icon-file-excel"></i>CSV</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!-- /MonthlyPerform table -->
+    </div>
+    <!-- /card -->
+</div>
+<!-- /content area -->
+
+@section Scripts { @Scripts.Render("~/bundles/jqueryval")
+
+<script src="~/Content/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script src="~/Content/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+<script src="~/Content/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+
+<script src="~/Content/global_assets/js/demo_pages/datatables_responsive.js"></script>
+}
+

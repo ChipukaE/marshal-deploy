@@ -1,0 +1,111 @@
+﻿@model IEnumerable<marshal_deploy.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Attendance.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TargetZW)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TargetUSD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Audd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Audu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Audp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lu_Audd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lu_Audu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lu_Audp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attendance.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TargetZW)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TargetUSD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Audd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Audu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Audp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lu_Audd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lu_Audu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lu_Audp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

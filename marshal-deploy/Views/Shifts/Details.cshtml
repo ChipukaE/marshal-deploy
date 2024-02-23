@@ -1,0 +1,110 @@
+﻿@model IEnumerable<marshal_deploy.Models.Shift>
+@{ ViewBag.Title = "Shift Details"; }
+
+<!-- Content area -->
+<div class="content">
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">Shift Details</h5>
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+                    <a class="list-icons-item" data-action="reload"></a>
+                    <a class="list-icons-item" data-action="remove"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shift details table -->
+        <table class="table datatable-responsive">
+            <thead>
+                <tr>
+                    <th>DeviceShiftCode</th>
+                    <th>PrecinctId</th>
+                    <th>UserId</th>
+                    <th>TerminalID</th>
+                    <th>StartDate</th>
+                    <th>EndDate</th>
+                    <th>Duration</th>
+                    <th>IsOpen</th>
+                    <th>TicketIssued</th>
+                    <th>Epayments</th>
+                    <th>Arrears</th>
+                    <th>Prepaid</th>
+                    <th>ShiftDiffCodeId</th>
+                    <th>ShiftDifference</th>
+                    <th>IsDeleted</th>
+                    <th>IsActive</th>
+                    <th>CreatedAt</th>
+                    <th>UpdatedAt</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var shift in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => shift.DeviceShiftCode)</td>
+                        <td>@Html.DisplayFor(model => shift.PrecinctId)</td>
+                        <td>@Html.DisplayFor(model => shift.UserId)</td>
+                        <td>@Html.DisplayFor(model => shift.TerminalID)</td>
+                        <td>@Html.DisplayFor(model => shift.start_datetime)</td>
+                        <td>@Html.DisplayFor(model => shift.end_datetime)</td>
+                        <td>@Html.DisplayFor(model => shift.Duration)</td>
+                        <td>@Html.DisplayFor(model => shift.IsOpen)</td>
+                        <td>@Html.DisplayFor(model => shift.ticketissued_amount)</td>
+                        <td>@Html.DisplayFor(model => shift.Epayments)</td>
+                        <td>@Html.DisplayFor(model => shift.total_arrears)</td>
+                        <td>@Html.DisplayFor(model => shift.total_prepaid)</td>
+                        <td>@Html.DisplayFor(model => shift.ShiftDiffCodeId)</td>
+                        <td>@Html.DisplayFor(model => shift.ShiftDifference)</td>
+                        <td>@Html.DisplayFor(model => shift.IsDeleted)</td>
+                        <td>@Html.DisplayFor(model => shift.IsActive)</td>
+                        <td>@Html.DisplayFor(model => shift.TotalCollectedUSD)</td>
+                        <td>@Html.DisplayFor(model => shift.TotalCollectedZW)</td>
+                        <td>@Html.DisplayFor(model => shift.TotalCountedZW)</td>
+                        <td>@Html.DisplayFor(model => shift.TotalCountedUSD)</td>
+                        <td>@Html.DisplayFor(model => shift.DeclaredVarianceZW)</td>
+                        <td>@Html.DisplayFor(model => shift.DeclaredVarianceUSD)</td>
+                        <td>@Html.DisplayFor(model => shift.CashupVarianceZW)</td>
+                        <td>@Html.DisplayFor(model => shift.CashupVarianceUSD)</td>
+                        <td>@Html.DisplayFor(model => shift.CashupZWD)</td>
+                        <td>@Html.DisplayFor(model => shift.CashupUSD)</td>
+                        <td>@Html.DisplayFor(model => shift.Total)</td>
+                        <td>@Html.DisplayFor(model => shift.Cashier)</td>
+                        <td>@Html.DisplayFor(model => shift.CashupAudd)</td>
+                        <td>@Html.DisplayFor(model => shift.LastConnection)</td>
+                        <td>@Html.DisplayFor(model => shift.CreatedAt)</td>
+                        <td>@Html.DisplayFor(model => shift.UpdatedAt)</td>
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i>PDF</a>
+                                        <a href="#" class="dropdown-item"><i class="icon-file-excel"></i>CSV</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <!-- /Shift details table -->
+    </div>
+    <!-- /card -->
+</div>
+<!-- /content area -->
+
+@section Scripts { @Scripts.Render("~/bundles/jqueryval")
+
+<script src="~/Content/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script src="~/Content/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+<script src="~/Content/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+
+<script src="~/Content/global_assets/js/demo_pages/datatables_responsive.js"></script>
+}

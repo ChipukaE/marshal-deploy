@@ -1,0 +1,263 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Limitless - Control Analysis</title>
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"
+          rel="stylesheet"
+          type="text/css" />
+    <link href="/Content/global_assets/css/icons/icomoon/styles.css"
+          rel="stylesheet"
+          type="text/css" />
+    <link href="/assets/css/bootstrap.min.css"
+          rel="stylesheet"
+          type="text/css" />
+    <link href="/assets/css/bootstrap_limitless.min.css"
+          rel="stylesheet"
+          type="text/css" />
+    <link href="/assets/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/components.min.css"
+          rel="stylesheet"
+          type="text/css" />
+    <link href="/assets/css/colors.min.css" rel="stylesheet" type="text/css" />
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script src="/Content/global_assets/js/main/jquery.min.js"></script>
+    <script src="/Content/global_assets/js/main/bootstrap.bundle.min.js"></script>
+    <script src="/Content/global_assets/js/plugins/loaders/blockui.min.js"></script>
+    <script src="/Content/global_assets/js/plugins/ui/ripple.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script src="/Content/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script src="/Content/global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+    <script src="/Content/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+    <script src="/Content/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script src="/Content/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script src="/Content/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+
+    <script src="/assets/js/app.js"></script>
+    <script src="/Content/global_assets/js/demo_pages/dashboard.js"></script>
+
+    <script src="/Content/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
+    <script src="/Content/global_assets/js/demo_pages/charts/echarts/columns_waterfalls.js"></script>
+    <script src="/Content/global_assets/js/demo_pages/charts/echarts/pies_donuts.js"></script>
+    <!-- /theme JS files -->
+
+</head>
+
+<body>
+
+    <!-- Main navbar -->
+    <div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
+        <div class="navbar-brand">
+            <a href="index.html" class="d-inline-block">
+                CONTROL ANALYSIS
+            </a>
+        </div>
+
+        <div class="d-md-none">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
+                <i class="icon-tree5"></i>
+            </button>
+            <button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
+                <i class="icon-paragraph-justify3"></i>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-mobile">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
+                        <i class="icon-paragraph-justify3"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <span class="navbar-text ml-md-3">
+                <span class="badge badge-mark border-orange-300 mr-2"></span>
+                Hello
+            </span>
+
+            <ul class="navbar-nav ml-md-auto">
+                <li class="nav-item">
+                    <a href="#" class="navbar-nav-link">
+                        <i class="icon-switch2"></i>
+                        <span class="d-md-none ml-2">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /main navbar -->
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main sidebar -->
+        <div class="sidebar sidebar-light sidebar-main sidebar-expand-md">
+
+            <!-- Sidebar mobile toggler -->
+            <div class="sidebar-mobile-toggler text-center">
+                <a href="#" class="sidebar-mobile-main-toggle">
+                    <i class="icon-arrow-left8"></i>
+                </a>
+                <span class="font-weight-semibold">Navigation</span>
+                <a href="#" class="sidebar-mobile-expand">
+                    <i class="icon-screen-full"></i>
+                    <i class="icon-screen-normal"></i>
+                </a>
+            </div>
+            <!-- /sidebar mobile toggler -->
+            <!-- Sidebar content -->
+            <div class="sidebar-content">
+                <!-- Main navigation -->
+                <div class="card card-sidebar-mobile">
+                    <ul class="nav nav-sidebar" data-nav-type="accordion">
+
+                        <!-- Main -->
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Home")" class="nav-link active">
+                                <i class="icon-home4"></i>
+                                <span>
+                                    Dashboard
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Zones</span></a>
+
+                            <ul class="nav nav-group-sub" data-submenu-title="Zones">
+                                <li>@Html.ActionLink("Zones", "Index", "Zones", new { area = "" }, new { @class = "nav-link" })</li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Clusters</span></a>
+
+                            <ul class="nav nav-group-sub" data-submenu-title="Clusters">
+                                <li>@Html.ActionLink("Clusters", "Index", "Clusters", new { area = "" }, new { @class = "nav-link" })</li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Precincts</span></a>
+
+                            <ul class="nav nav-group-sub" data-submenu-title="Precincts">
+                                <li>@Html.ActionLink("Precincts", "Index", "Precincts", new { area = "" }, new { @class = "nav-link" })</li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Users</span></a>
+
+                            <ul class="nav nav-group-sub" data-submenu-title="Users">
+                                <li>@Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Deployments</span></a>
+
+                            <ul class="nav nav-group-sub" data-submenu-title="Deployments">
+                                <li>@Html.ActionLink("Deployments", "Index", "Deployments", new { area = "" }, new { @class = "nav-link" })</li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Shifts</span></a>
+
+                            <ul class="nav nav-group-sub" data-submenu-title="Shifts">
+                                <li>@Html.ActionLink("Shifts", "Index", "Shifts", new { area = "" }, new { @class = "nav-link" })</li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Targets</span></a>
+
+                            <ul class="nav nav-group-sub" data-submenu-title="Targets">
+                                <li>@Html.ActionLink("DailyTargets", "Index", "DailyTargets", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("MonthlyTargets", "Index", "MonthlyTargets", new { area = "" }, new { @class = "nav-link" })</li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Performances</span></a>
+
+                            <ul class="nav nav-group-sub" data-submenu-title="Performances">
+                                <li>@Html.ActionLink("DailyPerforms", "Index", "DailyPerforms", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("MonthlyPerforms", "Index", "MonthlyPerforms", new { area = "" }, new { @class = "nav-link" })</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /main navigation -->
+            </div>
+            <!-- /sidebar content -->
+        </div>
+        <!-- /main sidebar -->
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Page header -->
+            <div class="page-header page-header-light">
+                <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+                    <div class="d-flex">
+                        <div class="breadcrumb">
+                            <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+                            <span class="breadcrumb-item active">Dashboard</span>
+                        </div>
+
+                        <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /page header -->
+            <div class="container body-content">@RenderBody()</div>
+
+            @*
+            <!-- Footer -->
+            <div class="navbar navbar-expand-lg navbar-light sticky-top">
+                <div class="text-center d-lg-none w-100">
+                    <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
+                        <i class="icon-unfold mr-2"></i>
+                        Footer
+                    </button>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navbar-footer">
+                    <span class="navbar-text">
+                        &copy; 2015 - 2018. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+                    </span>
+
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item"><a href="https://kopyov.ticksy.com/" class="navbar-nav-link" target="_blank"><i class="icon-lifebuoy mr-2"></i> Support</a></li>
+                        <li class="nav-item"><a href="http://demo.interface.club/limitless/docs/" class="navbar-nav-link" target="_blank"><i class="icon-file-text2 mr-2"></i> Docs</a></li>
+                        <li class="nav-item"><a href="https://themeforest.net/item/limitless-responsive-web-application-kit/13080328?ref=kopyov" class="navbar-nav-link font-weight-semibold"><span class="text-pink-400"><i class="icon-cart2 mr-2"></i> Purchase</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /footer -->
+                *@
+        </div>
+        <!-- /main content -->  
+        
+    </div>
+    <!-- /page content -->
+
+    
+
+    @Scripts.Render("~/bundles/jquery") @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
