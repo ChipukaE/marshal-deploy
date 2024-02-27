@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using marshal_deploy.Models;
@@ -123,6 +124,28 @@ namespace marshal_deploy.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+        public async Task<ActionResult> FetchShiftValues(string userId)
+        {
+            var shift = db.Shifts.FirstOrDefault(s => s.UserId.Equals(userId));
+
+            if (shift != null)
+            {
+                var shiftValues = new
+                {
+                    TotalCountedZW = decimal.Round((decimal)shift.TotalCountedZW, 2),
+                    TotalCountedUSD = decimal.Round((decimal)shift.TotalCountedUSD, 2)
+                };
+
+                return Json(shiftValues, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

@@ -3,6 +3,7 @@
 {
     <div id="notification" class="error">@TempData["ErrorMessage"]</div>
 }
+
 <style>
     .error {
         background-color: #ffdddd;
@@ -10,189 +11,205 @@
         padding: 10px;
         margin-bottom: 10px;
     }
+
+    .btn.btn-success a {
+        color: white;
+        text-decoration: none;
+        margin-bottom: auto;
+    }
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+    }
+
+        .dropdown-item i {
+            margin-right: 5px;
+        }
 </style>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header header-elements-inline">
-                <h5 class="card-title">@ViewBag.Title</h5>
-            </div>
-            <div class="card-body">
-                <div class="btn btn-success">
-                    @Html.ActionLink("Create Shift", "Create")
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">@ViewBag.Title</h5>
                 </div>
+                <div class="card-body">
+                    <div class="btn btn-success">
+                        @Html.ActionLink("Create Shift", "Create")
+                    </div>
 
-                <table class="table datatable-basic table-striped" width="100%">
-                    <thead>
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.DeviceShiftCode)</th>
-                            <th>@Html.DisplayNameFor(model => model.PrecinctId)</th>
-                            <th>@Html.DisplayNameFor(model => model.UserId)</th>
-                            <th>@Html.DisplayNameFor(model => model.TerminalID)</th>
-                            <th>@Html.DisplayNameFor(model => model.start_datetime)</th>
-                            <th>@Html.DisplayNameFor(model => model.end_datetime)</th>
-                            <th>@Html.DisplayNameFor(model => model.Duration)</th>
-                            <th>@Html.DisplayNameFor(model => model.IsOpen)</th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ticketissued_amount)
-                            </th>
-                            <th>@Html.DisplayNameFor(model => model.Epayments)</th>
-                            <th>@Html.DisplayNameFor(model => model.total_arrears)</th>
-                            <th>@Html.DisplayNameFor(model => model.total_prepaid)</th>
-                            <th>@Html.DisplayNameFor(model => model.ShiftDiffCodeId)</th>
-                            <th>@Html.DisplayNameFor(model => model.ShiftDifference)</th>
-                            @*
-                                <th>@Html.DisplayNameFor(model => model.Audd)</th>
-                                <th>@Html.DisplayNameFor(model => model.Audu)</th>
-                                <th>@Html.DisplayNameFor(model => model.Audp)</th>
-                                <th>@Html.DisplayNameFor(model => model.lu_Audd)</th>
-                                <th>@Html.DisplayNameFor(model => model.lu_Audu)</th>
-                                <th>@Html.DisplayNameFor(model => model.lu_Audp)</th>
-                            *@
-                            <th>@Html.DisplayNameFor(model => model.IsDeleted)</th>
-                            <th>@Html.DisplayNameFor(model => model.IsActive)</th>
-                            <th>@Html.DisplayNameFor(model => model.TotalCollectedUSD)</th>
-                            <th>@Html.DisplayNameFor(model => model.TotalCollectedZW)</th>
-                            <th>@Html.DisplayNameFor(model => model.TotalCountedZW)</th>
-                            <th>@Html.DisplayNameFor(model => model.TotalCountedUSD)</th>
-                            <th>@Html.DisplayNameFor(model => model.DeclaredVarianceZW)</th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DeclaredVarianceUSD)
-                            </th>
-                            <th>@Html.DisplayNameFor(model => model.CashupVarianceZW)</th>
-                            <th>@Html.DisplayNameFor(model => model.CashupVarianceUSD)</th>
-                            <th>@Html.DisplayNameFor(model => model.CashupZWD)</th>
-                            <th>@Html.DisplayNameFor(model => model.CashupUSD)</th>
-                            <th>m@Html.DisplayNameFor(model => model.Total)</th>
-                            <th>@Html.DisplayNameFor(model => model.Cashier)</th>
-                            <th>@Html.DisplayNameFor(model => model.CashupAudd)</th>
-                            <th>@Html.DisplayNameFor(model => model.LastConnection)</th>
-                            <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
-                            <th>@Html.DisplayNameFor(model => model.UpdatedAt)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr class="odd gradeX">
-                                <td>@Html.DisplayFor(modelItem => item.DeviceShiftCode)</td>
-                                <td>@Html.DisplayFor(modelItem => item.PrecinctId)</td>
-                                <td>@Html.DisplayFor(modelItem => item.UserId)</td>
-                                <td>@Html.DisplayFor(modelItem => item.TerminalID)</td>
-                                <td>@Html.DisplayFor(modelItem => item.start_datetime)</td>
-                                <td>@Html.DisplayFor(modelItem => item.end_datetime)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Duration)</td>
-                                @if (item.IsOpen == true)
-                                {
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
-                                    </td>
-
-                                }
-                                else
-                                {
-
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
-                                    </td>
-                                }
-                                <td>@Html.DisplayFor(modelItem => item.ticketissued_amount)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Epayments)</td>
-                                <td>@Html.DisplayFor(modelItem => item.total_arrears)</td>
-                                <td>@Html.DisplayFor(modelItem => item.total_prepaid)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ShiftDiffCodeId)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ShiftDifference)</td>
+                    <table class="table datatable-basic table-striped" width="100%">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.DeviceShiftCode)</th>
+                                <th>@Html.DisplayNameFor(model => model.PrecinctId)</th>
+                                <th>@Html.DisplayNameFor(model => model.UserId)</th>
+                                <th>@Html.DisplayNameFor(model => model.TerminalID)</th>
+                                <th>@Html.DisplayNameFor(model => model.start_datetime)</th>
+                                <th>@Html.DisplayNameFor(model => model.end_datetime)</th>
+                                <th>@Html.DisplayNameFor(model => model.Duration)</th>
+                                <th>@Html.DisplayNameFor(model => model.IsOpen)</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ticketissued_amount)
+                                </th>
+                                <th>@Html.DisplayNameFor(model => model.Epayments)</th>
+                                <th>@Html.DisplayNameFor(model => model.total_arrears)</th>
+                                <th>@Html.DisplayNameFor(model => model.total_prepaid)</th>
+                                <th>@Html.DisplayNameFor(model => model.ShiftDiffCodeId)</th>
+                                <th>@Html.DisplayNameFor(model => model.ShiftDifference)</th>
                                 @*
+                                    <th>@Html.DisplayNameFor(model => model.Audd)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Audu)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Audp)</th>
+                                    <th>@Html.DisplayNameFor(model => model.lu_Audd)</th>
+                                    <th>@Html.DisplayNameFor(model => model.lu_Audu)</th>
+                                    <th>@Html.DisplayNameFor(model => model.lu_Audp)</th>
+                                *@
+                                <th>@Html.DisplayNameFor(model => model.IsDeleted)</th>
+                                <th>@Html.DisplayNameFor(model => model.IsActive)</th>
+                                <th>@Html.DisplayNameFor(model => model.TotalCollectedUSD)</th>
+                                <th>@Html.DisplayNameFor(model => model.TotalCollectedZW)</th>
+                                <th>@Html.DisplayNameFor(model => model.TotalCountedZW)</th>
+                                <th>@Html.DisplayNameFor(model => model.TotalCountedUSD)</th>
+                                <th>@Html.DisplayNameFor(model => model.DeclaredVarianceZW)</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DeclaredVarianceUSD)
+                                </th>
+                                <th>@Html.DisplayNameFor(model => model.CashupVarianceZW)</th>
+                                <th>@Html.DisplayNameFor(model => model.CashupVarianceUSD)</th>
+                                <th>@Html.DisplayNameFor(model => model.CashupZWD)</th>
+                                <th>@Html.DisplayNameFor(model => model.CashupUSD)</th>
+                                <th>@Html.DisplayNameFor(model => model.Total)</th>
+                                <th>@Html.DisplayNameFor(model => model.Cashier)</th>
+                                <th>@Html.DisplayNameFor(model => model.CashupAudd)</th>
+                                <th>@Html.DisplayNameFor(model => model.LastConnection)</th>
+                                <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
+                                <th>@Html.DisplayNameFor(model => model.UpdatedAt)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="odd gradeX">
+                                    <td>@Html.DisplayFor(modelItem => item.DeviceShiftCode)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PrecinctId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TerminalID)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.start_datetime)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.end_datetime)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+                                    @if (item.IsOpen == true)
+                                    {
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
+                                        </td>
 
-                                    <td>@Html.DisplayFor(modelItem => item.Audd)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Audu)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Audp)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.lu_Audd)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.lu_Audu)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.lu_Audp)</td>
-                                *@ @if (item.IsDeleted == true)
-                                {
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
-                                    </td>
+                                    }
+                                    else
+                                    {
 
-                                }
-                                else
-                                {
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
+                                        </td>
+                                    }
+                                    <td>@Html.DisplayFor(modelItem => item.ticketissued_amount)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Epayments)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.total_arrears)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.total_prepaid)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ShiftDiffCodeId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ShiftDifference)</td>
+                                    @*
 
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
-                                    </td>
-                                } @if (item.IsActive == true)
-                                {
+                                        <td>@Html.DisplayFor(modelItem => item.Audd)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Audu)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Audp)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.lu_Audd)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.lu_Audu)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.lu_Audp)</td>
+                                    *@ @if (item.IsDeleted == true)
+                                    {
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
+                                        </td>
 
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
-                                    </td>
+                                    }
+                                    else
+                                    {
 
-                                }
-                                else
-                                {
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
+                                        </td>
+                                    } @if (item.IsActive == true)
+                                    {
 
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
-                                    </td>
-                                }
-                                <td>@Html.DisplayFor(modelItem => item.TotalCollectedUSD)</td>
-                                <td>@Html.DisplayFor(modelItem => item.TotalCollectedZW)</td>
-                                <td>@Html.DisplayFor(modelItem => item.TotalCountedZW)</td>
-                                <td>@Html.DisplayFor(modelItem => item.TotalCountedUSD)</td>
-                                <td>@Html.DisplayFor(modelItem => item.DeclaredVarianceZW)</td>
-                                <td>@Html.DisplayFor(modelItem => item.DeclaredVarianceUSD)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CashupVarianceZW)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CashupVarianceUSD)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CashupZWD)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CashupUSD)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Cashier)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CashupAudd)</td>
-                                <td>@Html.DisplayFor(modelItem => item.LastConnection)</td>
-                                <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
-                                <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
+                                        </td>
 
-                                <td class="text-center">
-                                    <div class="list-icons">
-                                        <div class="dropdown">
-                                            <a href="#"
-                                               class="list-icons-item"
-                                               data-toggle="dropdown">
-                                                <i class="icon-menu9"></i>
-                                            </a>
+                                    }
+                                    else
+                                    {
 
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">
-                                                    @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
+                                        </td>
+                                    }
+                                    <td>@Html.DisplayFor(modelItem => item.TotalCollectedUSD)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalCollectedZW)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalCountedZW)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalCountedUSD)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DeclaredVarianceZW)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DeclaredVarianceUSD)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CashupVarianceZW)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CashupVarianceUSD)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CashupZWD)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CashupUSD)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Cashier)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CashupAudd)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.LastConnection)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+
+                                    <td class="text-center">
+                                        <div class="list-icons">
+                                            <div class="dropdown">
+                                                <a href="#"
+                                                   class="list-icons-item"
+                                                   data-toggle="dropdown">
+                                                    <i class="icon-menu9"></i>
                                                 </a>
-                                                <a href="#" class="dropdown-item">
-                                                    @Html.ActionLink("Details", "Details", new
-                                                    {
-                                                        id =
-                                                    item.id
-                                                    })
-                                                </a>
+
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="#" class="dropdown-item">
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                                                    </a>
+                                                    <a href="#" class="dropdown-item">
+                                                        @Html.ActionLink("Details", "Details", new
+                                                        {
+                                                            id =
+                                                        item.id
+                                                        })
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+    @section scripts{
 
-@section scripts{
-
-    <script src="~/Scripts/printThis.js"></script>
-    <script>
+        <script src="~/Scripts/printThis.js"></script>
+        <script>
     var messagedone = "@ViewBag.Zvaita";
 
     $(document).ready(function () {
@@ -216,6 +233,6 @@
         }, 5000);
       }
     });
-    </script>
-}
+        </script>
+    }
 

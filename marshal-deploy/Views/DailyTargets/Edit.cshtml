@@ -1,6 +1,24 @@
 ﻿@model marshal_deploy.Models.DailyTarget
 @{ ViewBag.Title = "Edit"; }
 
+<style>
+    .error {
+        background-color: #ffdddd;
+        color: #ff0000;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .btn.btn-success a {
+        color: white;
+        text-decoration: none;
+    }
+    .btn.btn-danger a {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+
 <div class="content">
     <div class="card">
         <div class="card-header header-elements-inline">
@@ -16,18 +34,6 @@
 
                     <div class="form-row">
                         @Html.HiddenFor(model => model.id)
-
-                        <div class="form-group col-4">
-                            @Html.LabelFor(model => model.ShiftId, "ShiftId", htmlAttributes:
-                            new { @class = "control-label col-md-6" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("ShiftId", null, htmlAttributes: new
-                                {
-                                    @class =
-                                "form-control"
-                                }) @Html.ValidationMessageFor(model => model.ShiftId, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
 
                         <div class="form-group col-4">
                             @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes:
@@ -226,7 +232,7 @@
             @class = "text-danger" })
           </div>
         </div>
-                        *@
+
 
                         <div class="form-group col-4">
                             @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new
@@ -244,17 +250,17 @@
                                 @class = "text-danger"
                                 })
                             </div>
-                        </div>
+                        </div> *@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-success ml-3">
-                                Save <i class="icon-paperplane ml-2"></i>
+                                Save 
                             </button>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-danger ml-3">
                                 @Html.ActionLink("Cancel", "Index")
-                                <i class="icon-paperplane ml-2"></i>
+                                
                             </button>
                         </div>
                     </div>

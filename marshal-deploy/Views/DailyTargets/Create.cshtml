@@ -1,5 +1,25 @@
-﻿@model marshal_deploy.Models.DailyTarget 
-    @{ ViewBag.Title = "Create"; }
+﻿@model marshal_deploy.Models.DailyTarget
+@{ ViewBag.Title = "Create"; }
+
+
+<style>
+    .error {
+        background-color: #ffdddd;
+        color: #ff0000;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .btn.btn-success a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn.btn-danger a {
+        color: white;
+        text-decoration: none;
+    }
+</style>
 
 <div class="content">
     <div class="card">
@@ -20,19 +40,6 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="form-row">
-                        <div class="form-group col-4">
-                            @Html.LabelFor(model => model.ShiftId, "ShiftId", htmlAttributes:
-                            new { @class = "control-label col-md-6" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("ShiftId", ViewBag.ShiftId as SelectList,
-                                htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.ShiftId, "", new
-                                {
-                                @class = "text-danger"
-                                })
-                            </div>
-                        </div>
-
                         <div class="form-group col-4">
                             @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes:
                             new { @class = "control-label col-md-6" })
@@ -84,13 +91,12 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-success ml-3">
-                                Create <i class="icon-paperplane ml-2"></i>
+                                Create
                             </button>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-danger ml-3">
-                                @Html.ActionLink("Cancel", "Index")
-                                <i class="icon-paperplane ml-2"></i>
+                            <button type="button" onclick="window.location.href='@Url.Action("Index")'" class="btn btn-danger ml-3">
+                                Cancel
                             </button>
                         </div>
                     </div>
@@ -101,29 +107,14 @@
 </div>
 
 @section scripts {
-    <script src="~/Scripts/jquery-3.7.1.js"></script>
-    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-    <script src="~/Scripts/select2.js"></script>
+    <script src="~/Content/global_assets/js/main/jquery.min.js"></script>
+    <script src="~/Content/global_assets/js/plugins/forms/selects/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#ShiftId').select2({
-                theme: "classic",
-            });
             $('#UserId').select2({
                 theme: "classic",
             });
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            $(document).ready(function () {
-                console.log("haya");
-                $('#ShiftId').change(function () {
-                    var selectedShiftId = $(this).val();
-                    console.log(selectedShiftId);
-                    getUserId(selectedShiftId);
-                });
-            })
-        });
-    </script>
+
 }

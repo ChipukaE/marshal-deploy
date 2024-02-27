@@ -3,6 +3,7 @@
 {
     <div id="notification" class="error">@TempData["ErrorMessage"]</div>
 }
+
 <style>
     .error {
         background-color: #ffdddd;
@@ -10,128 +11,144 @@
         padding: 10px;
         margin-bottom: 10px;
     }
+
+    .btn.btn-success a {
+        color: white;
+        text-decoration: none;
+        margin-bottom: auto;
+    }
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+    }
+
+        .dropdown-item i {
+            margin-right: 5px;
+        }
 </style>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header header-elements-inline">
-                <h5 class="card-title">@ViewBag.Title</h5>
-            </div>
-            <div class="card-body">
-                <div class="btn btn-success">
-                    @Html.ActionLink("Create Precinct", "Create")
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">@ViewBag.Title</h5>
                 </div>
+                <div class="card-body">
+                    <div class="btn btn-success">
+                        @Html.ActionLink("Create Precinct", "Create")
+                    </div>
 
-                <table class="table datatable-basic table-striped" width="100%">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Cluster.ClusterName)
-                            </th>
-                            <th>@Html.DisplayNameFor(model => model.Zone.ZoneName)</th>
-                            <th>@Html.DisplayNameFor(model => model.PrecinctName)</th>
-                            <th>@Html.DisplayNameFor(model => model.Target)</th>
-                            <th>@Html.DisplayNameFor(model => model.Lunch)</th>
-                            @*
-                                <th>@Html.DisplayNameFor(model => model.Audd)</th>
-                                <th>@Html.DisplayNameFor(model => model.Audu)</th>
-                                <th>@Html.DisplayNameFor(model => model.Audp)</th>
-                                <th>@Html.DisplayNameFor(model => model.lu_Audd)</th>
-                                <th>@Html.DisplayNameFor(model => model.lu_Audu)</th>
-                                <th>@Html.DisplayNameFor(model => model.lu_Audp)</th>
-                            *@
-                            <th>@Html.DisplayNameFor(model => model.IsDeleted)</th>
-                            <th>@Html.DisplayNameFor(model => model.IsActive)</th>
-                            <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
-                            <th>@Html.DisplayNameFor(model => model.UpdatedAt)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr class="odd gradeX">
-                                <td>@Html.DisplayFor(modelItem => item.Cluster.ClusterName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Zone.ZoneName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.PrecinctName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Target)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Lunch)</td>
+                    <table class="table datatable-basic table-striped" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cluster.ClusterName)
+                                </th>
+                                <th>@Html.DisplayNameFor(model => model.Zone.ZoneName)</th>
+                                <th>@Html.DisplayNameFor(model => model.PrecinctName)</th>
+                                <th>@Html.DisplayNameFor(model => model.Target)</th>
+                                <th>@Html.DisplayNameFor(model => model.Lunch)</th>
                                 @*
+                                    <th>@Html.DisplayNameFor(model => model.Audd)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Audu)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Audp)</th>
+                                    <th>@Html.DisplayNameFor(model => model.lu_Audd)</th>
+                                    <th>@Html.DisplayNameFor(model => model.lu_Audu)</th>
+                                    <th>@Html.DisplayNameFor(model => model.lu_Audp)</th>
+                                *@
+                                <th>@Html.DisplayNameFor(model => model.IsDeleted)</th>
+                                <th>@Html.DisplayNameFor(model => model.IsActive)</th>
+                                <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
+                                <th>@Html.DisplayNameFor(model => model.UpdatedAt)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="odd gradeX">
+                                    <td>@Html.DisplayFor(modelItem => item.Cluster.ClusterName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Zone.ZoneName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PrecinctName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Target)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Lunch)</td>
+                                    @*
 
-                                    <td>@Html.DisplayFor(modelItem => item.Audd)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Audu)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Audp)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.lu_Audd)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.lu_Audu)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.lu_Audp)</td>
-                                *@ @if (item.IsDeleted == true)
-                                {
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
-                                    </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Audd)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Audu)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Audp)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.lu_Audd)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.lu_Audu)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.lu_Audp)</td>
+                                    *@ @if (item.IsDeleted == true)
+                                    {
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
+                                        </td>
 
-                                }
-                                else
-                                {
+                                    }
+                                    else
+                                    {
 
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
-                                    </td>
-                                } @if (item.IsActive == true)
-                                {
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
+                                        </td>
+                                    } @if (item.IsActive == true)
+                                    {
 
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
-                                    </td>
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
+                                        </td>
 
-                                }
-                                else
-                                {
+                                    }
+                                    else
+                                    {
 
-                                    <td class="hidden-phone">
-                                        <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
-                                    </td>
-                                }
-                                <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
-                                <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                                        <td class="hidden-phone">
+                                            <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
+                                        </td>
+                                    }
+                                    <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
 
-                                <td class="text-center">
-                                    <div class="list-icons">
-                                        <div class="dropdown">
-                                            <a href="#"
-                                               class="list-icons-item"
-                                               data-toggle="dropdown">
-                                                <i class="icon-menu9"></i>
-                                            </a>
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">
-                                                    @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                                    <td class="text-center">
+                                        <div class="list-icons">
+                                            <div class="dropdown">
+                                                <a href="#"
+                                                   class="list-icons-item"
+                                                   data-toggle="dropdown">
+                                                    <i class="icon-menu9"></i>
                                                 </a>
-                                                <a href="#" class="dropdown-item">
-                                                    @Html.ActionLink("Details", "Details", new
-                                                    {
-                                                        id =
-                                                    item.id
-                                                    })
-                                                </a>
+
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="#" class="dropdown-item">
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                                                    </a>
+                                                    <a href="#" class="dropdown-item">
+                                                        @Html.ActionLink("Details", "Details", new
+                                                        {
+                                                            id =
+                                                        item.id
+                                                        })
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+    @section scripts{
 
-@section scripts{
-
-    <script src="~/Scripts/printThis.js"></script>
-    <script>
+        <script src="~/Scripts/printThis.js"></script>
+        <script>
     var messagedone = "@ViewBag.Zvaita";
 
     $(document).ready(function () {
@@ -155,6 +172,6 @@
         }, 5000);
       }
     });
-    </script>
-}
+        </script>
+    }
 

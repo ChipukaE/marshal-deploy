@@ -7,10 +7,8 @@
         <div class="card-header header-elements-inline">
             <h5 class="card-title">Daily Target Details</h5>
             <div class="header-elements">
-                <div class="list-icons">
-                    <a class="list-icons-item" data-action="collapse"></a>
-                    <a class="list-icons-item" data-action="reload"></a>
-                    <a class="list-icons-item" data-action="remove"></a>
+                <div class="header-elements">
+                    <button type="button" class="btn btn-light btn-sm ml-3"><i class="icon-printer mr-2"></i> Print</button>
                 </div>
             </div>
         </div>
@@ -19,7 +17,6 @@
         <table class="table datatable-responsive">
             <thead>
                 <tr>
-                    <th>ShiftId</th>
                     <th>UserId</th>
                     <th>TargetZW</th>
                     <th>TargetUSD</th>
@@ -34,7 +31,7 @@
                 @foreach (var dailyTarget in Model)
                 {
                     <tr>
-                       <td>@Html.DisplayFor(model => dailyTarget.ShiftId)</td>
+
                         <td>@Html.DisplayFor(model => dailyTarget.UserId)</td>
                         <td>@Html.DisplayFor(model => dailyTarget.TargetZW)</td>
                         <td>@Html.DisplayFor(model => dailyTarget.TargetUSD)</td>
@@ -48,6 +45,11 @@
                                     <a href="#" class="list-icons-item" data-toggle="dropdown">
                                         <i class="icon-menu9"></i>
                                     </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> PDF</a>
+                                        <a href="#" class="dropdown-item"><i class="icon-file-excel"></i> CSV</a>
+                                    </div>
                                 </div>
                             </div>
                         </td>

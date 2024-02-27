@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using marshal_deploy.Models;
@@ -34,12 +35,8 @@ namespace marshal_deploy.Controllers
         {
             
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName");
-            ViewBag.DailyTargetId = new SelectList(db.DailyTargets, "id", "UserId");
-            ViewBag.TargetZW = new SelectList(db.DailyTargets, "id", "TargetZW");
-            ViewBag.TargetUSD = new SelectList(db.DailyTargets, "id", "TargetUSD");
+            ViewBag.UserId = new SelectList(db.DailyTargets, "UserId", "UserId");
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id");
-            ViewBag.TotalCountedZW = new SelectList(db.Shifts, "id", "TotalCountedZW");
-            ViewBag.TotalCountedUSD = new SelectList(db.Shifts, "id", "TotalCountedUSD");
             return View();
         }
 
@@ -48,7 +45,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ShiftId,UserId,DailyTargetId,TargetZW,TargetUSD,TotalCountedZW,TotalCountedUSD,PerformanceZW,PerformanceUSD,Average,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyPerform dailyPerform)
+        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,UserId,DailyTargetId,TargetZW,TargetUSD,TotalCountedZW,TotalCountedUSD,PerformanceZW,PerformanceUSD,Average,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyPerform dailyPerform)
         {
             if (ModelState.IsValid)
             {
@@ -57,18 +54,28 @@ namespace marshal_deploy.Controllers
                 dailyPerform.IsDeleted = false;
                 dailyPerform.IsActive = true;
 
+                // Retrieve the DailyTarget based on the selected UserId
+                DailyTarget dailyTarget = db.DailyTargets.FirstOrDefault(t => t.UserId == dailyPerform.UserId);
 
-                // Calculate performancezw and performanceusd
-                dailyPerform.PerformanceZW = (dailyPerform.TotalCountedZW / dailyPerform.TargetZW) * 100;
-                dailyPerform.PerformanceUSD = (dailyPerform.TotalCountedUSD / dailyPerform.TargetUSD) * 100;
+                if (dailyTarget != null)
+                {
+                    dailyPerform.TargetZW = dailyTarget.TargetZW;
+                    dailyPerform.TargetUSD = dailyTarget.TargetUSD;
+                }
+                else
+                {
+                    dailyPerform.TargetZW = 0; 
+                    dailyPerform.TargetUSD = 0; 
+                }
 
-                // Calculate average
-                dailyPerform.Average = (dailyPerform.PerformanceZW + dailyPerform.PerformanceUSD) / 2;
+                // Retrieve the Shift based on the selected ShiftId
+                Shift shift = db.Shifts.FirstOrDefault(s => s.id == dailyPerform.ShiftId);
 
-                // Assign rating
-                var performances = db.DailyPerforms.ToList();
-                var highestAverage = performances.Max(p => p.Average);
-                dailyPerform.Rating = performances.Count(p => p.Average > highestAverage) + 1;
+                if (shift != null)
+                {
+                    dailyPerform.TotalCountedZW = shift.TotalCountedZW;
+                    dailyPerform.TotalCountedUSD = shift.TotalCountedUSD;
+                }
 
                 db.DailyPerforms.Add(dailyPerform);
                 db.SaveChanges();
@@ -76,12 +83,9 @@ namespace marshal_deploy.Controllers
             }
 
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName", dailyPerform.ClusterId);
-            ViewBag.DailyTargetId = new SelectList(db.DailyTargets, "id", "UserId", dailyPerform.DailyTargetId);
-            ViewBag.TargetZW = new SelectList(db.DailyTargets, "id", "TargetZW", dailyPerform.TargetZW);
-            ViewBag.TargetUSD = new SelectList(db.DailyTargets, "id", "TargetUSD", dailyPerform.TargetUSD);
+            ViewBag.UserId = new SelectList(db.DailyTargets, "UserId", "UserId", dailyPerform.UserId);
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", dailyPerform.ShiftId);
-            ViewBag.TotalCountedZW = new SelectList(db.Shifts, "id", "TotalCountedZW", dailyPerform.TotalCountedZW);
-            ViewBag.TotalCountedUSD = new SelectList(db.Shifts, "id", "TotalCountedUSD", dailyPerform.TotalCountedUSD);
+
             return View(dailyPerform);
         }
 
@@ -98,12 +102,8 @@ namespace marshal_deploy.Controllers
                 return HttpNotFound();
             }
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName", dailyPerform.ClusterId);
-            ViewBag.DailyTargetId = new SelectList(db.DailyTargets, "id", "UserId", dailyPerform.DailyTargetId);
-            ViewBag.TargetZW = new SelectList(db.DailyTargets, "id", "TargetZW", dailyPerform.TargetZW);
-            ViewBag.TargetUSD = new SelectList(db.DailyTargets, "id", "TargetUSD", dailyPerform.TargetUSD);
+            ViewBag.UserId = new SelectList(db.DailyTargets, "UserId", "UserId", dailyPerform.UserId);
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", dailyPerform.ShiftId);
-            ViewBag.TotalCountedZW = new SelectList(db.Shifts, "id", "TotalCountedZW", dailyPerform.TotalCountedZW);
-            ViewBag.TotalCountedUSD = new SelectList(db.Shifts, "id", "TotalCountedUSD", dailyPerform.TotalCountedUSD);
             return View(dailyPerform);
         }
 
@@ -126,12 +126,8 @@ namespace marshal_deploy.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName", dailyPerform.ClusterId);
-            ViewBag.DailyTargetId = new SelectList(db.DailyTargets, "id", "UserId", dailyPerform.DailyTargetId);
-            ViewBag.TargetZW = new SelectList(db.DailyTargets, "id", "TargetZW", dailyPerform.TargetZW);
-            ViewBag.TargetUSD = new SelectList(db.DailyTargets, "id", "TargetUSD", dailyPerform.TargetUSD);
+            ViewBag.UserId = new SelectList(db.DailyTargets, "id", "UserId", dailyPerform.UserId);
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", dailyPerform.ShiftId);
-            ViewBag.TotalCountedZW = new SelectList(db.Shifts, "id", "TotalCountedZW", dailyPerform.TotalCountedZW);
-            ViewBag.TotalCountedUSD = new SelectList(db.Shifts, "id", "TotalCountedUSD", dailyPerform.TotalCountedUSD);
             return View(dailyPerform);
         }
 
@@ -160,6 +156,8 @@ namespace marshal_deploy.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        
 
         protected override void Dispose(bool disposing)
         {

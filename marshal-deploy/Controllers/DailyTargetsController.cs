@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using marshal_deploy.Models;
@@ -21,28 +22,6 @@ namespace marshal_deploy.Controllers
             return View(dailyTargets.ToList());
         }
 
-
-        //get users
-        public ActionResult GetUserIds(int shiftId)
-        {
-            using (var dbContext = new Deploy())
-            {
-                var userIds = dbContext.Shifts
-                    .Where(s => s.id == shiftId)
-                    .Select(s => s.UserId)
-                    .ToList();
-
-                var userIdOptions = userIds.Select(u => new SelectListItem
-                {
-                    Value = u,
-                    Text = u
-                });
-
-                return Json(userIdOptions, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-
         // GET: DailyTargets/Details/5
         public ActionResult Details()
         {
@@ -55,7 +34,7 @@ namespace marshal_deploy.Controllers
         public ActionResult Create()
         {
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id");
-            ViewBag.UserId = new SelectList(db.Shifts, "id", "UserId");
+            ViewBag.UserId = new SelectList(db.Shifts, "UserId", "UserId");
             return View();
         }
 
@@ -64,7 +43,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ShiftId,UserId,TargetZW,TargetUSD,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyTarget dailyTarget)
+        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,UserId,TargetZW,TargetUSD,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyTarget dailyTarget)
         {
             if (ModelState.IsValid)
             {
@@ -73,18 +52,13 @@ namespace marshal_deploy.Controllers
                 dailyTarget.IsDeleted = false;
                 dailyTarget.IsActive = true;
 
-                // Retrieve the associated UserId based on the selected ShiftId
-                int selectedShiftId = (int)dailyTarget.ShiftId;
-                var userId = db.Shifts.Where(s => s.id == selectedShiftId).Select(s => s.UserId).FirstOrDefault();
-                dailyTarget.UserId = userId;
-
                 db.DailyTargets.Add(dailyTarget);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", dailyTarget.ShiftId);
-            ViewBag.UserId = new SelectList(db.Shifts, "id", "UserId", dailyTarget.UserId);
+            ViewBag.UserId = new SelectList(db.Shifts, "UserId", "UserId", dailyTarget.UserId);
 
             return View(dailyTarget);
         }
@@ -102,7 +76,7 @@ namespace marshal_deploy.Controllers
                 return HttpNotFound();
             }
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", dailyTarget.ShiftId);
-            ViewBag.UserId = new SelectList(db.Shifts, "id", "UserId", dailyTarget.UserId);
+            ViewBag.UserId = new SelectList(db.Shifts, "UserId", "UserId", dailyTarget.UserId);
             return View(dailyTarget);
         }
 
@@ -126,7 +100,7 @@ namespace marshal_deploy.Controllers
             }
 
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", dailyTarget.ShiftId);
-            ViewBag.UserId = new SelectList(db.Shifts, "id", "UserId", dailyTarget.UserId);
+            ViewBag.UserId = new SelectList(db.Shifts, "UserId", "UserId", dailyTarget.UserId);
             return View(dailyTarget);
         }
 
@@ -164,7 +138,27 @@ namespace marshal_deploy.Controllers
             return RedirectToAction("Index");
         }
 
-       
+        public async Task<ActionResult> FetchTargetValues(string userId)
+        {
+            var dailyTarget = db.DailyTargets.FirstOrDefault(t => t.UserId.Equals(userId));
+
+            if (dailyTarget != null)
+            {
+                var targetValues = new
+                {
+                    TargetZW = decimal.Round((decimal)dailyTarget.TargetZW, 2),
+                    TargetUSD = decimal.Round((decimal)dailyTarget.TargetUSD, 2)
+                };
+
+                return Json(targetValues, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
