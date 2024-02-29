@@ -125,8 +125,14 @@ namespace marshal_deploy.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: /Shifts/FetchAllPrecincts
+        public async Task<JsonResult> FetchAllPrecincts()
+        {
+            var precinctIds = db.Shifts.Select(shift => shift.PrecinctId).Distinct().ToList();
+            return Json(new { precinctIds = precinctIds }, JsonRequestBehavior.AllowGet);
+        }
 
-
+        //GET: Shifts/FetchShiftValues
         public async Task<ActionResult> FetchShiftValues(string userId)
         {
             var shift = db.Shifts.FirstOrDefault(s => s.UserId.Equals(userId));

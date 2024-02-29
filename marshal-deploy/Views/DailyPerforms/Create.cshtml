@@ -40,14 +40,17 @@
 
                     <div class="form-row">
                         <div class="form-group col-4">
-                            @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes:
-                            new { @class = "control-label col-md-6" })
+                            @Html.LabelFor(model => model.UserId, htmlAttributes: new
+                            {
+                            @class = "control-label col-md-6"
+                            })
                             <div class="col-md-10">
-                                @Html.DropDownList("UserId", null, htmlAttributes: new
+                                @Html.EditorFor(model => model.UserId, new
                                 {
-                                    @class =
-                                "form-control"
-                                }) @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                                htmlAttributes = new { @class = "form-control", id = "UserId" }
+                                })
+                                @Html.ValidationMessageFor(model => model.UserId, "", new
+                                { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -104,77 +107,77 @@
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.TotalCountedUSD, new
                                 {
-                                htmlAttributes = new { @class = "form-control", id="TotalCountedUSD" }
+                                htmlAttributes = new { @class = "form-control", id = "TotalCountedUSD" }
                                 })
                                 @Html.ValidationMessageFor(model => model.TotalCountedUSD, "", new
                                 { @class = "text-danger" })
                             </div>
                         </div>
 
-                         <div class="form-group col-4">
-                                                    @Html.LabelFor(model => model.PerformanceZW, htmlAttributes: new
-                                                    {
-                                                    @class = "control-label col-md-6"
-                                                    })
-                                                    <div class="col-md-10">
-                                                        @Html.EditorFor(model => model.PerformanceZW, new
-                                                   {
-                                                       htmlAttributes
-                                                        = new { @class = "form-control", id= "PerformanceZW" }
-                                                   })
-                                                        @Html.ValidationMessageFor(model => model.PerformanceZW, "", new
-                                                        {
-                                                        @class = "text-danger"
-                                                        })
-                                                    </div>
-                                                </div>
+                        <div class="form-group col-4">
+                            @Html.LabelFor(model => model.PerformanceZW, htmlAttributes: new
+                            {
+                            @class = "control-label col-md-6"
+                            })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PerformanceZW, new
+                           {
+                               htmlAttributes
+                                = new { @class = "form-control", id = "PerformanceZW" }
+                           })
+                                @Html.ValidationMessageFor(model => model.PerformanceZW, "", new
+                                {
+                                @class = "text-danger"
+                                })
+                            </div>
+                        </div>
 
-                                                <div class="form-group col-4">
-                                                    @Html.LabelFor(model => model.PerformanceUSD, htmlAttributes: new
-                                                    {
-                                                    @class = "control-label col-md-6"
-                                                    })
-                                                    <div class="col-md-10">
-                                                        @Html.EditorFor(model => model.PerformanceUSD, new
-                                                   {
-                                                       htmlAttributes = new { @class = "form-control", id = "PerformanceUSD" }
-                                                   })
-                                                        @Html.ValidationMessageFor(model => model.PerformanceUSD, "", new
-                                                        { @class = "text-danger" })
-                                                    </div>
-                                                </div>
+                        <div class="form-group col-4">
+                            @Html.LabelFor(model => model.PerformanceUSD, htmlAttributes: new
+                            {
+                            @class = "control-label col-md-6"
+                            })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PerformanceUSD, new
+                           {
+                               htmlAttributes = new { @class = "form-control", id = "PerformanceUSD" }
+                           })
+                                @Html.ValidationMessageFor(model => model.PerformanceUSD, "", new
+                                { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                                                <div class="form-group col-4">
-                                                    @Html.LabelFor(model => model.Average, htmlAttributes: new
-                                                    {
-                                                        @class
-                                                    = "control-label col-md-6"
-                                                    })
-                                                    <div class="col-md-10">
-                                                        @Html.EditorFor(model => model.Average, new
-                                                        {
-                                                            htmlAttributes = new
-                                                        { @class = "form-control", id="Average" }
-                                                        }) @Html.ValidationMessageFor(model =>
-                            model.Average, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </div>
+                        <div class="form-group col-4">
+                            @Html.LabelFor(model => model.Average, htmlAttributes: new
+                            {
+                                @class
+                            = "control-label col-md-6"
+                            })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Average, new
+                                {
+                                    htmlAttributes = new
+                                { @class = "form-control", id = "Average" }
+                                }) @Html.ValidationMessageFor(model =>
+ model.Average, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                                                <div class="form-group col-4">
-                                                    @Html.LabelFor(model => model.Rating, htmlAttributes: new
-                                                    {
-                                                        @class =
-                                                    "control-label col-md-6"
-                                                    })
-                                                    <div class="col-md-10">
-                                                        @Html.EditorFor(model => model.Rating, new
-                                                        {
-                                                            htmlAttributes = new
-                                                        { @class = "form-control", id="Rating" }
-                                                        }) @Html.ValidationMessageFor(model =>
-                            model.Rating, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </div>
+                        <div class="form-group col-4">
+                            @Html.LabelFor(model => model.Rating, htmlAttributes: new
+                            {
+                                @class =
+                            "control-label col-md-6"
+                            })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Rating, new
+                                {
+                                    htmlAttributes = new
+                                { @class = "form-control", id = "Rating" }
+                                }) @Html.ValidationMessageFor(model =>
+ model.Rating, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
                         <div class="form-group col-4">
                             @Html.LabelFor(model => model.ClusterId, "ClusterId",
@@ -314,6 +317,7 @@ model.ClusterId, "", new { @class = "text-danger" })
     </div>
 </div>
 @section scripts {
+
     <script src="~/Content/global_assets/js/main/jquery.min.js"></script>
     <script src="~/Content/global_assets/js/plugins/forms/selects/select2.min.js"></script>
     <script>
@@ -321,90 +325,33 @@ model.ClusterId, "", new { @class = "text-danger" })
             $("#UserId").select2({
                 theme: "classic",
             });
-           
-            $("#ClusterId").select2({
+            $("#TargetZW").select2({
                 theme: "classic",
             });
-
-            // Handle change event of the UserId dropdown list
-            $("#UserId").change(function () {
-                var selectedUserId = $(this).val();
-
-                // Make an AJAX request to fetch the TargetZW and TargetUSD values
-                $.ajax({
-                    url: "/DailyTargets/FetchTargetValues",
-                    type: "GET",
-                    data: { userId: selectedUserId },
-                    success: function (response) {
-                        // Update the TargetZW and TargetUSD fields with the fetched values
-                        $("#TargetZW").val(response.TargetZW);
-                        $("#TargetUSD").val(response.TargetUSD);
-
-                        // Calculate PerformanceZW and update the field
-                        var totalCountedZW = parseFloat($("#TotalCountedZW").val());
-                        var targetZW = parseFloat(response.TargetZW);
-                        var performanceZW = (totalCountedZW / targetZW) * 100;
-                        $("#PerformanceZW").val(performanceZW.toFixed(2));
-
-                        // Calculate PerformanceUSD and update the field
-                        var totalCountedUSD = parseFloat($("#TotalCountedUSD").val());
-                        var targetUSD = parseFloat(response.TargetUSD);
-                        var performanceUSD = (totalCountedUSD / targetUSD) * 100;
-                        $("#PerformanceUSD").val(performanceUSD.toFixed(2));
-                    },
-                    error: function () {
-                        // Handle error if the AJAX request fails
-                        console.log("Error fetching target values");
-                    }
-                });
-
-                // Make an AJAX request to fetch the TotalCountedZW and TotalCountedUSD values
-                $.ajax({
-                    url: "/Shifts/FetchShiftValues",
-                    type: "GET",
-                    data: { userId: selectedUserId },
-                    success: function (response) {
-                        $("#TotalCountedZW").val(response.TotalCountedZW);
-                        $("#TotalCountedUSD").val(response.TotalCountedUSD);
-
-                        // Calculate PerformanceZW and update the field
-                        var targetZW = parseFloat($("#TargetZW").val());
-                        var totalCountedZW = parseFloat(response.TotalCountedZW);
-                        var performanceZW = (totalCountedZW / targetZW) * 100;
-                        $("#PerformanceZW").val(performanceZW.toFixed(2) + "%");
-
-                        // Calculate PerformanceUSD and update the field
-                        var targetUSD = parseFloat($("#TargetUSD").val());
-                        var totalCountedUSD = parseFloat(response.TotalCountedUSD);
-                        var performanceUSD = (totalCountedUSD / targetUSD) * 100;
-                        $("#PerformanceUSD").val(performanceUSD.toFixed(2) + "%");
-
-                        // Calculate average and update the field
-                        var average = (performanceZW + performanceUSD) / 2;
-                        $("#Average").val(average.toFixed(2) + "%");
-
-                        // Allocate rating based on the average performance
-                        var ratings = [performanceZW, performanceUSD];
-                        var sortedRatings = ratings.slice().sort(function (a, b) { return b - a; });
-                        var rating = sortedRatings.indexOf(average) + 1;
-                        $("#Rating").val(rating);
-
-                        // Allocate cluster based on UserID and average performance
-                        var average = parseInt($("#Average").val());
-                        var cluster;
-                        if (average <= 110) {
-                            cluster = "A";
-                        } else {
-                            cluster = "B";
-                        }
-                        $("#ClusterId").val(cluster);
-                    },
-                    error: function () {
-                        console.log("Error fetching total values");
-                    }
-                });
-               
+            $("#TargetUSD").select2({
+                theme: "classic",
             });
+            $("#TotalCountedZW").select2({
+                theme: "classic",
+            });
+            $("#TotalCountedUSD").select2({
+                theme: "classic",
+            });
+            $("#PerformanceZW").select2({
+                theme: "classic",
+            });
+            $("#PerformanceUSD").select2({
+                theme: "classic",
+            });
+            $("#Average").select2({
+                theme: "classic",
+            });
+            $("#Rating").select2({
+                theme: "classic",
+            });
+            $("#ClusterId").select2({
+                theme: "classic",
+            }); 
         });
     </script>
 

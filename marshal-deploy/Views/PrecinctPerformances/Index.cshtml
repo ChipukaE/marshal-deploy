@@ -45,9 +45,6 @@ null)
                         <thead>
                             <tr>
                                 <th>@Html.DisplayNameFor(model => model.Period.PeriodType)</th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Shift.id)
-                                </th>
                                 <th>@Html.DisplayNameFor(model => model.PrecinctId)</th>
                                 <th>@Html.DisplayNameFor(model => model.ClusterId)</th>
                                 <th>@Html.DisplayNameFor(model => model.ZoneId)</th>
@@ -73,9 +70,6 @@ null)
                             {
                                 <tr class="odd gradeX">
                                     <td>@Html.DisplayFor(modelItem => item.Period.PeriodType)</td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Shift.id)
-                                    </td>
                                     <td>@Html.DisplayFor(modelItem => item.PrecinctId)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ClusterId)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ZoneId)</td>

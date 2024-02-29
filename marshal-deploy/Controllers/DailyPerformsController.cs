@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -49,35 +50,43 @@ namespace marshal_deploy.Controllers
         {
             if (ModelState.IsValid)
             {
-                dailyPerform.CreatedAt = DateTime.Now;
-                dailyPerform.UpdatedAt = DateTime.Now;
-                dailyPerform.IsDeleted = false;
-                dailyPerform.IsActive = true;
+                var userTargets = await db.DailyTargets.ToListAsync();
+                var shifts = await db.Shifts.ToListAsync();
+                var dailyPerforms = new List<DailyPerform>();
 
-                // Retrieve the DailyTarget based on the selected UserId
-                DailyTarget dailyTarget = db.DailyTargets.FirstOrDefault(t => t.UserId == dailyPerform.UserId);
-
-                if (dailyTarget != null)
+                foreach (var userTarget in userTargets)
                 {
-                    dailyPerform.TargetZW = dailyTarget.TargetZW;
-                    dailyPerform.TargetUSD = dailyTarget.TargetUSD;
-                }
-                else
-                {
-                    dailyPerform.TargetZW = 0; 
-                    dailyPerform.TargetUSD = 0; 
+                    var userId = userTarget.UserId;
+
+                    DailyPerform dailyPerform1 = new DailyPerform
+                    {
+                        UserId = userId,
+                        TargetZW = userTarget.TargetZW,
+                        TargetUSD = userTarget.TargetUSD,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        IsDeleted = false,
+                        IsActive = true
+                    };
+
+                    var shift = shifts.FirstOrDefault(s => s.UserId == userId);
+                    if (shift != null)
+                    {
+                        dailyPerform1.TotalCountedZW = shift.TotalCountedZW;
+                        dailyPerform1.TotalCountedUSD = shift.TotalCountedUSD;
+
+                        dailyPerform1.PerformanceZW = (dailyPerform1.TotalCountedZW / dailyPerform1.TargetZW) * 100;
+                        dailyPerform1.PerformanceUSD = (dailyPerform1.TotalCountedUSD / dailyPerform1.TargetUSD) * 100;
+
+                        dailyPerform1.Average = (dailyPerform1.PerformanceZW + dailyPerform1.PerformanceUSD) / 2;
+
+                        dailyPerform1.Rating = CalculateRating(dailyPerform1.PerformanceZW, dailyPerform1.PerformanceUSD);
+                    }
+
+                    dailyPerforms.Add(dailyPerform1);
                 }
 
-                // Retrieve the Shift based on the selected ShiftId
-                Shift shift = db.Shifts.FirstOrDefault(s => s.id == dailyPerform.ShiftId);
-
-                if (shift != null)
-                {
-                    dailyPerform.TotalCountedZW = shift.TotalCountedZW;
-                    dailyPerform.TotalCountedUSD = shift.TotalCountedUSD;
-                }
-
-                db.DailyPerforms.Add(dailyPerform);
+                db.DailyPerforms.AddRange(dailyPerforms);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -157,7 +166,43 @@ namespace marshal_deploy.Controllers
             return RedirectToAction("Index");
         }
 
-        
+
+        private int CalculateRating(decimal? performanceZW, decimal? performanceUSD)
+        {
+            // Calculate the average of PerformanceZW and PerformanceUSD
+            decimal average = (performanceZW.GetValueOrDefault() + performanceUSD.GetValueOrDefault()) / 2;
+
+            // Retrieve all the existing averages from the database
+            var existingAverages = db.DailyPerforms
+                .Where(d => d.PerformanceZW.HasValue && d.PerformanceUSD.HasValue)
+                .Select(d => (d.PerformanceZW.Value + d.PerformanceUSD.Value) / 2)
+                .ToList();
+
+            // Sort the existing averages in descending order
+            existingAverages.Sort();
+            existingAverages.Reverse();
+
+            // Find the index of the average in the sorted list
+            var index = existingAverages.IndexOf(average);
+
+            // Assign the rating based on the index
+            var rating = index + 1;
+
+            return rating;
+        }
+
+        private int CalculateClusterId(int rating)
+        {
+            if (rating >= 1 && rating <= 110)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
 
         protected override void Dispose(bool disposing)
         {

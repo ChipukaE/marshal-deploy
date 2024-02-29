@@ -138,6 +138,16 @@ namespace marshal_deploy.Controllers
             return RedirectToAction("Index");
         }
 
+
+        //retrieving all users
+        // GET: /DailyTargets/FetchAllUserIds
+        public async Task<JsonResult> FetchAllUserIds() { 
+            var userIds = db.DailyTargets.Select(target => target.UserId).Distinct().ToList(); 
+            return Json(new { userIds = userIds }, JsonRequestBehavior.AllowGet); 
+        }
+
+
+        //retrieving targets
         public async Task<ActionResult> FetchTargetValues(string userId)
         {
             var dailyTarget = db.DailyTargets.FirstOrDefault(t => t.UserId.Equals(userId));
