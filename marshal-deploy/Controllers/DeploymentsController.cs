@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using marshal_deploy.Models;
@@ -45,22 +46,43 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ShiftId,UserId,DailyPerformId,PrecinctPerformanceId,PrecinctId,ZoneId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] Deployment deployment)
+        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,UserId,DailyPerformId,PrecinctPerformanceId,PrecinctId,ZoneId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] Deployment deployment)
         {
             if (ModelState.IsValid)
             {
-                deployment.CreatedAt = DateTime.Now;
-                deployment.UpdatedAt = DateTime.Now;
-                deployment.IsDeleted = false;
-                deployment.IsActive = true;
+                var userTargets = await db.DailyPerforms.ToListAsync();
+                var precinctPerformances = await db.PrecinctPerformances.ToListAsync();
+                var deployments = new List<Deployment>();
 
-                db.Deployments.Add(deployment);
+                foreach (var userTarget in userTargets)
+                {
+                    var UserId = userTarget.UserId;
+
+                    Deployment deployment1 = new Deployment
+                    {
+                        UserId = UserId,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        IsDeleted = false,
+                        IsActive = true
+                    };
+
+                    var precinctPerformance = precinctPerformances.FirstOrDefault();
+                    if (precinctPerformance != null)
+                    {
+                        deployment1.PrecinctId = precinctPerformance.PrecinctId;
+                        deployment1.ZoneId = precinctPerformance.ZoneId;
+                    }
+                    deployments.Add(deployment1);
+                }
+
+                db.Deployments.AddRange(deployments);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.ShiftId = new SelectList(db.DailyPerforms, "id", "id", deployment.ShiftId);
-            ViewBag.UserId = new SelectList(db.DailyPerforms, "id", "UserId", deployment.DailyPerformId);
+            ViewBag.UserId = new SelectList(db.DailyPerforms, "id", "UserId", deployment.UserId);
             ViewBag.PrecinctPerformanceId = new SelectList(db.PrecinctPerformances, "id", "id", deployment.PrecinctPerformanceId);
             ViewBag.PrecinctId = new SelectList(db.PrecinctPerformances, "id", "PrecinctId", deployment.PrecinctId);
             ViewBag.ZoneId = new SelectList(db.PrecinctPerformances, "id", "ZoneId", deployment.ZoneId);
@@ -151,3 +173,4 @@ namespace marshal_deploy.Controllers
         }
     }
 }
+

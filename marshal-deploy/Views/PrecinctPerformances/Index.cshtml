@@ -49,15 +49,15 @@ null)
                                 <th>@Html.DisplayNameFor(model => model.ClusterId)</th>
                                 <th>@Html.DisplayNameFor(model => model.ZoneId)</th>
                                 <th>@Html.DisplayNameFor(model => model.Performance)</th>
-                                <th>@Html.DisplayNameFor(model => model.Variance)</th>
-                                <th>@Html.DisplayNameFor(model => model.Rating)</th>
-                                @*
-                                    <th>@Html.DisplayNameFor(model => model.Audd)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Audu)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Audp)</th>
-                                    <th>@Html.DisplayNameFor(model => model.lu_Audd)</th>
-                                    <th>@Html.DisplayNameFor(model => model.lu_Audu)</th>
-                                    <th>@Html.DisplayNameFor(model => model.lu_Audp)</th>
+                                @*<th>@Html.DisplayNameFor(model => model.Variance)</th>
+        <th>@Html.DisplayNameFor(model => model.Rating)</th>
+
+            <th>@Html.DisplayNameFor(model => model.Audd)</th>
+            <th>@Html.DisplayNameFor(model => model.Audu)</th>
+            <th>@Html.DisplayNameFor(model => model.Audp)</th>
+            <th>@Html.DisplayNameFor(model => model.lu_Audd)</th>
+            <th>@Html.DisplayNameFor(model => model.lu_Audu)</th>
+            <th>@Html.DisplayNameFor(model => model.lu_Audp)</th>
                                 *@
                                 <th>@Html.DisplayNameFor(model => model.IsDeleted)</th>
                                 <th>@Html.DisplayNameFor(model => model.IsActive)</th>
@@ -74,16 +74,16 @@ null)
                                     <td>@Html.DisplayFor(modelItem => item.ClusterId)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ZoneId)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Performance)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Variance)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-                                    @*
+                                    @*<td>@Html.DisplayFor(modelItem => item.Variance)</td>
+        <td>@Html.DisplayFor(modelItem => item.Rating)</td>
 
-                                        <td>@Html.DisplayFor(modelItem => item.Audd)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Audu)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Audp)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.lu_Audd)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.lu_Audu)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.lu_Audp)</td>
+
+            <td>@Html.DisplayFor(modelItem => item.Audd)</td>
+            <td>@Html.DisplayFor(modelItem => item.Audu)</td>
+            <td>@Html.DisplayFor(modelItem => item.Audp)</td>
+            <td>@Html.DisplayFor(modelItem => item.lu_Audd)</td>
+            <td>@Html.DisplayFor(modelItem => item.lu_Audu)</td>
+            <td>@Html.DisplayFor(modelItem => item.lu_Audp)</td>
                                     *@ @if (item.IsDeleted == true)
                                     {
                                         <td class="hidden-phone">
@@ -130,6 +130,13 @@ null)
                                                     </a>
                                                     <a href="#" class="dropdown-item">
                                                         @Html.ActionLink("Details", "Details", new
+                                                        {
+                                                            id =
+                                                        item.id
+                                                        })
+                                                    </a>
+                                                    <a href="#" class="dropdown-item">
+                                                        @Html.ActionLink("Delete", "Delete", new
                                                         {
                                                             id =
                                                         item.id

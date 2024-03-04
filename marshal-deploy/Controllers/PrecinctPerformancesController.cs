@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using marshal_deploy.Models;
@@ -34,8 +36,7 @@ namespace marshal_deploy.Controllers
         {
             ViewBag.PeriodId = new SelectList(db.Periods, "id", "PeriodType");
             ViewBag.PrecinctId = new SelectList(db.Precincts, "id", "PrecinctName");
-            ViewBag.ClusterId = new SelectList(db.Precincts, "id", "ClusterId");
-            ViewBag.ZoneId = new SelectList(db.Precincts, "id", "ZoneId");
+            ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName");
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id");
             return View();
         }
@@ -45,16 +46,40 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ShiftId,PrecinctId,ClusterId,ZoneId,PeriodId,Performance,Variance,Rating,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] PrecinctPerformance precinctPerformance)
+        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,PrecinctId,ClusterId,ZoneId,PeriodId,Performance,Variance,Rating,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] PrecinctPerformance precinctPerformance)
         {
             if (ModelState.IsValid)
             {
-                precinctPerformance.CreatedAt = DateTime.Now;
-                precinctPerformance.UpdatedAt = DateTime.Now;
-                precinctPerformance.IsDeleted = false;
-                precinctPerformance.IsActive = true;
+                var precinctTargets = await db.Precincts.ToListAsync();
+                var shifts = await db.Shifts.ToListAsync();
+                var precinctPerformances = new List<PrecinctPerformance>();
 
-                db.PrecinctPerformances.Add(precinctPerformance);
+                foreach (var precinctTarget in precinctTargets)
+                {
+                    var precinctId = precinctTarget.id;
+                    var target = precinctTarget.Target;
+
+                    PrecinctPerformance performance = new PrecinctPerformance
+                    {
+                        PrecinctId = precinctId,
+                        ZoneId = precinctTarget.ZoneId,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        IsDeleted = false,
+                        IsActive = true
+                    };
+
+                    var shift = shifts.FirstOrDefault(s => s.PrecinctId == precinctId);
+                    if (shift != null)
+                    {
+                        performance.Performance = (shift.TotalCountedUSD / precinctTarget.Target) * 100;
+                    }
+                    precinctPerformances.Add(performance);
+                }
+            
+           
+
+                db.PrecinctPerformances.AddRange(precinctPerformances);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,6 +91,9 @@ namespace marshal_deploy.Controllers
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", precinctPerformance.ShiftId);
             return View(precinctPerformance);
         }
+
+
+
 
         // GET: PrecinctPerformances/Edit/5
         public ActionResult Edit(int? id)
@@ -149,3 +177,4 @@ namespace marshal_deploy.Controllers
         }
     }
 }
+

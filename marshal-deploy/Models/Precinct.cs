@@ -28,6 +28,7 @@ namespace marshal_deploy.Models
 
         public decimal? Target { get; set; }
 
+
         [StringLength(10)]
         public string Lunch { get; set; }
 

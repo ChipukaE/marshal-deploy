@@ -37,21 +37,7 @@
                     <div class="form-row">
                         @Html.HiddenFor(model => model.id)
 
-                        <div class="form-group col-4">
-                            @Html.LabelFor(model => model.ShiftId, htmlAttributes: new
-                            {
-                                @class
-                            = "control-label col-md-6"
-                            })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.ShiftId, new
-                                {
-                                    htmlAttributes = new
-                                { @class = "form-control" }
-                                }) @Html.ValidationMessageFor(model =>
-model.ShiftId, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        
 
                         <div class="form-group col-4">
                             @Html.LabelFor(model => model.UserId, htmlAttributes: new
@@ -70,23 +56,6 @@ model.UserId, "", new { @class = "text-danger" })
                         </div>
 
 
-
-                        <div class="form-group col-4">
-                            @Html.LabelFor(model => model.PrecinctPerformanceId,
-                            "PrecinctPerformanceId", htmlAttributes: new
-                                 {
-                                     @class =
-                            "control-label col-md-6"
-                                 })
-                            <div class="col-md-10">
-                                @Html.DropDownList("PrecinctPerformanceId", null, htmlAttributes:
-                                new { @class = "form-control" }) @Html.ValidationMessageFor(model
-=> model.PrecinctPerformanceId, "", new
-{
-@class = "text-danger"
-})
-                            </div>
-                        </div>
 
                         <div class="form-group col-4">
                             @Html.LabelFor(model => model.PrecinctId, htmlAttributes: new

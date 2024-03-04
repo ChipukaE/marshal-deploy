@@ -2671,11 +2671,6 @@
     <Content Include="Views\DailyTargets\Details.cshtml" />
     <Content Include="Views\DailyTargets\Edit.cshtml" />
     <Content Include="Views\DailyTargets\Index.cshtml" />
-    <Content Include="Views\Deployments\Create.cshtml" />
-    <Content Include="Views\Deployments\Delete.cshtml" />
-    <Content Include="Views\Deployments\Details.cshtml" />
-    <Content Include="Views\Deployments\Edit.cshtml" />
-    <Content Include="Views\Deployments\Index.cshtml" />
     <Content Include="Views\MonthlyPerforms\Create.cshtml" />
     <Content Include="Views\MonthlyPerforms\Delete.cshtml" />
     <Content Include="Views\MonthlyPerforms\Details.cshtml" />
@@ -2716,6 +2711,11 @@
     <Content Include="Views\Zones\Details.cshtml" />
     <Content Include="Views\Zones\Edit.cshtml" />
     <Content Include="Views\Zones\Index.cshtml" />
+    <Content Include="Views\Deployments\Create.cshtml" />
+    <Content Include="Views\Deployments\Delete.cshtml" />
+    <Content Include="Views\Deployments\Details.cshtml" />
+    <Content Include="Views\Deployments\Edit.cshtml" />
+    <Content Include="Views\Deployments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -20,13 +20,12 @@
             <thead>
                 <tr>
                     <th>PeriodType</th>
-                    <th>ShiftId</th>
                     <th>PrecinctId</th>
                     <th>ClusterId</th>
                     <th>ZoneId</th>
                     <th>Performance</th>
-                    <th>Variance</th>
-                    <th>Rating</th>
+                    @*<th>Variance</th>
+                    <th>Rating</th>*@
                     <th>IsDeleted</th>
                     <th>IsActive</th>
                     <th>CreatedAt</th>
@@ -41,16 +40,12 @@
                         <td>
                             @Html.DisplayFor(model => precinctPerformance.Period.PeriodType)
                         </td>
-                        <td>
-                            @Html.DisplayFor(model =>
-                            precinctPerformance.Shift.id)
-                        </td>
                         <td>@Html.DisplayFor(model => precinctPerformance.PrecinctId)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.ClusterId)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.ZoneId)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.Performance)</td>
-                        <td>@Html.DisplayFor(model => precinctPerformance.Variance)</td>
-                        <td>@Html.DisplayFor(model => precinctPerformance.Rating)</td>
+                        @*<td>@Html.DisplayFor(model => precinctPerformance.Variance)</td>
+                        <td>@Html.DisplayFor(model => precinctPerformance.Rating)</td>*@
                         <td>@Html.DisplayFor(model => precinctPerformance.IsDeleted)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.IsActive)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.CreatedAt)</td>
