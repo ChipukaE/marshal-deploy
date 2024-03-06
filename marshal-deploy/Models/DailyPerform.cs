@@ -24,19 +24,11 @@ namespace marshal_deploy.Models
 
         public int? DailyTargetId { get; set; }
 
-        public decimal? TargetZW { get; set; }
+        public decimal? Target{ get; set; }
 
-        public decimal? TargetUSD { get; set; }
+        public decimal? Total { get; set; }
 
-        public decimal? TotalCountedZW { get; set; }
-
-        public decimal? TotalCountedUSD { get; set; }
-
-        public decimal? PerformanceZW { get; set; }
-
-        public decimal? PerformanceUSD { get; set; }
-
-        public decimal? Average { get; set; }
+        public decimal? Performance { get; set; }
 
         public int? Rating { get; set; }
 

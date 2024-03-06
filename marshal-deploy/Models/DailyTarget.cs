@@ -22,9 +22,7 @@ namespace marshal_deploy.Models
         [StringLength(50)]
         public string UserId { get; set; }
 
-        public decimal? TargetZW { get; set; }
-
-        public decimal? TargetUSD { get; set; }
+        public decimal? Target { get; set; }
 
         public DateTime? Audd { get; set; }
 

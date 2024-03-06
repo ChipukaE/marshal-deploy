@@ -47,6 +47,10 @@ namespace marshal_deploy.Models
 
         public DateTime? UpdatedAt { get; set; }
 
+        public virtual Precinct Precinct { get; set; }
+
+        public virtual Zone Zone { get; set; }
+
         public virtual DailyPerform DailyPerform { get; set; }
 
         public virtual PrecinctPerformance PrecinctPerformance { get; set; }

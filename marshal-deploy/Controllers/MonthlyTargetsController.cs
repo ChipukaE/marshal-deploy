@@ -33,7 +33,7 @@ namespace marshal_deploy.Controllers
         public ActionResult Create()
         {
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id");
-            ViewBag.UserId = new SelectList(db.Shifts, "id", "UserId");
+            ViewBag.UserId = new SelectList(db.Shifts, "UserId", "UserId");
             return View();
         }
 
@@ -42,7 +42,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ShiftId,UserId,MonthlyZW,MonthlyUSD,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] MonthlyTarget monthlyTarget)
+        public ActionResult Create([Bind(Include = "id,ShiftId,UserId,Target,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] MonthlyTarget monthlyTarget)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace marshal_deploy.Controllers
             }
 
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", monthlyTarget.ShiftId);
-            ViewBag.UserId = new SelectList(db.Shifts, "id", "UserId", monthlyTarget.UserId);
+            ViewBag.UserId = new SelectList(db.Shifts, "UserId", "UserId", monthlyTarget.UserId);
             return View(monthlyTarget);
         }
 
@@ -81,7 +81,7 @@ namespace marshal_deploy.Controllers
                 return HttpNotFound();
             }
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", monthlyTarget.ShiftId);
-            ViewBag.UserId = new SelectList(db.Shifts, "id", "UserId", monthlyTarget.UserId);
+            ViewBag.UserId = new SelectList(db.Shifts, "UserId", "UserId", monthlyTarget.UserId);
             return View(monthlyTarget);
         }
 
@@ -90,7 +90,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ShiftId,UserId,MonthlyZW,MonthlyUSD,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] MonthlyTarget monthlyTarget)
+        public ActionResult Edit([Bind(Include = "id,ShiftId,UserId,Target,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] MonthlyTarget monthlyTarget)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace marshal_deploy.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", monthlyTarget.ShiftId);
-            ViewBag.UserId = new SelectList(db.Shifts, "id", "UserId", monthlyTarget.UserId);
+            ViewBag.UserId = new SelectList(db.Shifts, "UserId", "UserId", monthlyTarget.UserId);
             return View(monthlyTarget);
         }
 

@@ -19,16 +19,12 @@
         <table class="table datatable-responsive">
             <thead>
                 <tr>
-                    <th>ClusterName</th>
                     <th>UserId</th>
-                    <th>MonthlyZW</th>
-                    <th>MonthlyUSD</th>
-                    <th>CollectedZW</th>
-                    <th>CollectedUSD</th>
-                    <th>PerformanceZW</th>
-                    <th>PerformanceUSD</th>
-                    <th>Average</th>
+                    <th>Target</th>
+                    <th>Collected</th>
+                    <th>Performance</th>
                     <th>Rating</th>
+                    <th>ClusterName</th>
                     <th>IsDeleted</th>
                     <th>IsActive</th>
                     <th>CreatedAt</th>
@@ -41,21 +37,15 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(model => monthlyPerform.Cluster.ClusterName)
-                        </td>
-                        <td>
                             @Html.DisplayFor(model => monthlyPerform.MonthlyTarget.UserId)
                         </td>
-                       
-                        <td>@Html.DisplayFor(model => monthlyPerform.MonthlyZW)</td>
-                        <td>@Html.DisplayFor(model => monthlyPerform.MonthlyUSD)</td>
-                        <td>@Html.DisplayFor(model => monthlyPerform.CollectedZW)</td>
-                        <td>@Html.DisplayFor(model => monthlyPerform.CollectedUSD)</td>
-                        <td>@Html.DisplayFor(model => monthlyPerform.PerformanceZW)</td>
-                        <td>@Html.DisplayFor(model => monthlyPerform.PerformanceUSD)</td>
-                        <td>@Html.DisplayFor(model => monthlyPerform.Average)</td>
-
+                        <td>@Html.DisplayFor(model => monthlyPerform.Target)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.Collected)</td>
+                        <td>@Html.DisplayFor(model => monthlyPerform.Performance)</td>
                         <td>@Html.DisplayFor(model => monthlyPerform.Rating)</td>
+                        <td>
+                            @Html.DisplayFor(model => monthlyPerform.Cluster.ClusterName)
+                        </td>
                         <td>@Html.DisplayFor(model => monthlyPerform.IsDeleted)</td>
                         <td>@Html.DisplayFor(model => monthlyPerform.IsActive)</td>
                         <td>@Html.DisplayFor(model => monthlyPerform.CreatedAt)</td>

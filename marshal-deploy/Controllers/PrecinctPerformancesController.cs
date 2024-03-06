@@ -19,7 +19,7 @@ namespace marshal_deploy.Controllers
         // GET: PrecinctPerformances
         public ActionResult Index()
         {
-            var precinctPerformances = db.PrecinctPerformances.Include(p => p.Period).Include(p => p.Precinct).Include(p => p.Shift);
+            var precinctPerformances = db.PrecinctPerformances.Include(p => p.Period).Include(p => p.Precinct).Include(p => p.Cluster).Include(p => p.Shift);
             return View(precinctPerformances.ToList());
         }
 
@@ -46,7 +46,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,PrecinctId,ClusterId,ZoneId,PeriodId,Performance,Variance,Rating,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] PrecinctPerformance precinctPerformance)
+        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,PrecinctId,ClusterId,ZoneId,PeriodId,Total,Performance,Variance,Rating,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] PrecinctPerformance precinctPerformance)
         {
             if (ModelState.IsValid)
             {
@@ -72,12 +72,19 @@ namespace marshal_deploy.Controllers
                     var shift = shifts.FirstOrDefault(s => s.PrecinctId == precinctId);
                     if (shift != null)
                     {
-                        performance.Performance = (shift.TotalCountedUSD / precinctTarget.Target) * 100;
+                        performance.Total = ((shift.TotalCollectedUSD - shift.CollectedEnforcementUSD)) + ((shift.TotalCollectedZW - shift.CollectedEnforcementZW) / 17300);
+                        performance.Performance = (performance.Total / precinctTarget.Target) * 100;
                     }
+
                     precinctPerformances.Add(performance);
                 }
-            
-           
+
+                precinctPerformances = precinctPerformances.OrderByDescending(p => p.Performance).ToList();
+                for (int i = 0; i < precinctPerformances.Count; i++)
+                {
+                    precinctPerformances[i].Rating = i + 1;
+                    precinctPerformances[i].ClusterId = (i < 110) ? 1 : 3;
+                }
 
                 db.PrecinctPerformances.AddRange(precinctPerformances);
                 db.SaveChanges();
@@ -86,7 +93,7 @@ namespace marshal_deploy.Controllers
 
             ViewBag.PeriodId = new SelectList(db.Periods, "id", "PeriodType", precinctPerformance.PeriodId);
             ViewBag.PrecinctId = new SelectList(db.Precincts, "id", "PrecinctName", precinctPerformance.PrecinctId);
-            ViewBag.ClusterId = new SelectList(db.Precincts, "id", "ClusterId", precinctPerformance.ClusterId);
+            ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName", precinctPerformance.ClusterId);
             ViewBag.ZoneId = new SelectList(db.Precincts, "id", "ZoneId", precinctPerformance.ZoneId);
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", precinctPerformance.ShiftId);
             return View(precinctPerformance);
@@ -120,7 +127,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ShiftId,PrecinctId,ClusterId,ZoneId,PeriodId,Performance,Variance,Rating,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] PrecinctPerformance precinctPerformance)
+        public ActionResult Edit([Bind(Include = "id,ShiftId,PrecinctId,ClusterId,ZoneId,PeriodId,Total,Performance,Variance,Rating,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] PrecinctPerformance precinctPerformance)
         {
             if (ModelState.IsValid)
             {

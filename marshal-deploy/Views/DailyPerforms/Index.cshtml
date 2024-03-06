@@ -45,18 +45,11 @@ null)
                             <tr>
 
                                 <th>@Html.DisplayNameFor(model => model.UserId)</th>
-                                @*<th>@Html.DisplayNameFor(model => model.TargetZW)</th>
-                                <th>@Html.DisplayNameFor(model => model.TargetUSD)</th>
-                                <th>@Html.DisplayNameFor(model => model.TotalCountedZW)</th>
-                                <th>@Html.DisplayNameFor(model => model.TotalCountedUSD)</th>*@
-                                <th>@Html.DisplayNameFor(model => model.PerformanceZW)</th>
-                                <th>@Html.DisplayNameFor(model => model.PerformanceUSD)</th>
-                                <th>@Html.DisplayNameFor(model => model.Average)</th>
+                                <th>@Html.DisplayNameFor(model => model.Target)</th>
+                                <th>@Html.DisplayNameFor(model => model.Total)</th>
+                                <th>@Html.DisplayNameFor(model => model.Performance)</th>
                                 <th>@Html.DisplayNameFor(model => model.Rating)</th>
-                                <th>@Html.DisplayNameFor(model => model.IsDeleted)</th>
-                                <th>@Html.DisplayNameFor(model => model.IsActive)</th>
-                                <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
-                                <th>@Html.DisplayNameFor(model => model.UpdatedAt)</th>
+                                <th>@Html.DisplayNameFor(model => model.Cluster.ClusterName)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,44 +58,11 @@ null)
                                 <tr class="odd gradeX">
 
                                     <td>@Html.DisplayFor(modelItem => item.UserId)</td>
-                                    @*<td>@Html.DisplayFor(modelItem => item.TargetZW)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TargetUSD)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TotalCountedZW)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TotalCountedUSD)</td>*@
-                                    <td>@Html.DisplayFor(modelItem => item.PerformanceZW)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.PerformanceUSD)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Average)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Target)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Performance)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-                                    @if (item.IsDeleted == true)
-                                    {
-                                        <td class="hidden-phone">
-                                            <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
-                                        </td>
-
-                                    }
-                                    else
-                                    {
-
-                                        <td class="hidden-phone">
-                                            <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
-                                        </td>
-                                    } @if (item.IsActive == true)
-                                    {
-
-                                        <td class="hidden-phone">
-                                            <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>
-                                        </td>
-
-                                    }
-                                    else
-                                    {
-
-                                        <td class="hidden-phone">
-                                            <span class="badge badge-flat border-danger text-danger-600 ml-2">No</span>
-                                        </td>
-                                    }
-                                    <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Cluster.ClusterName)</td>
 
                                     <td class="text-center">
                                         <div class="list-icons">

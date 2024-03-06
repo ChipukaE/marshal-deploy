@@ -181,6 +181,7 @@
     <Compile Include="Controllers\MonthlyPerformsController.cs" />
     <Compile Include="Controllers\MonthlyTargetsController.cs" />
     <Compile Include="Controllers\PeriodsController.cs" />
+    <Compile Include="Controllers\PrecinctMonthliesController.cs" />
     <Compile Include="Controllers\PrecinctPerformancesController.cs" />
     <Compile Include="Controllers\PrecinctsController.cs" />
     <Compile Include="Controllers\ShiftsController.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Models\MonthlyTarget.cs" />
     <Compile Include="Models\Period.cs" />
     <Compile Include="Models\Precinct.cs" />
+    <Compile Include="Models\PrecinctMonthly.cs" />
     <Compile Include="Models\PrecinctPerformance.cs" />
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\sysdiagram.cs" />
@@ -2716,6 +2718,11 @@
     <Content Include="Views\Deployments\Details.cshtml" />
     <Content Include="Views\Deployments\Edit.cshtml" />
     <Content Include="Views\Deployments\Index.cshtml" />
+    <Content Include="Views\PrecinctMonthlies\Create.cshtml" />
+    <Content Include="Views\PrecinctMonthlies\Delete.cshtml" />
+    <Content Include="Views\PrecinctMonthlies\Details.cshtml" />
+    <Content Include="Views\PrecinctMonthlies\Edit.cshtml" />
+    <Content Include="Views\PrecinctMonthlies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

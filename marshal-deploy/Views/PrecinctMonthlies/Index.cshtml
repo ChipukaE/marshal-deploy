@@ -1,6 +1,5 @@
-﻿@model IEnumerable<marshal_deploy.Models.PrecinctPerformance>
-@{ ViewBag.Title = "PrecinctPerformance"; } @if (TempData["ErrorMessage"] !=
-null)
+﻿@model IEnumerable<marshal_deploy.Models.PrecinctMonthly>
+@{ ViewBag.Title = "PrecinctMonthly"; } @if (TempData["ErrorMessage"] != null)
 {
     <div id="notification" class="error">@TempData["ErrorMessage"]</div>
 }
@@ -44,24 +43,32 @@ null)
                     <table class="table datatable-basic table-striped" width="100%">
                         <thead>
                             <tr>
-                                @*<th>@Html.DisplayNameFor(model => model.Period.PeriodType)</th>*@
-                                <th>@Html.DisplayNameFor(model => model.Precinct.PrecinctName)</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Precinct.PrecinctName)
+                                </th>
                                 <th>@Html.DisplayNameFor(model => model.ZoneId)</th>
+                                <th>@Html.DisplayNameFor(model => model.Collected)</th>
                                 <th>@Html.DisplayNameFor(model => model.Performance)</th>
                                 <th>@Html.DisplayNameFor(model => model.Rating)</th>
-                                <th>@Html.DisplayNameFor(model => model.Cluster.ClusterName)</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cluster.ClusterName)
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr class="odd gradeX">
-                                    @*<td>@Html.DisplayFor(modelItem => item.Period.PeriodType)</td>*@
-                                    <td>@Html.DisplayFor(modelItem => item.Precinct.PrecinctName)</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Precinct.PrecinctName)
+                                    </td>
                                     <td>@Html.DisplayFor(modelItem => item.ZoneId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Collected)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Performance)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Cluster.ClusterName)</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cluster.ClusterName)
+                                    </td>
 
                                     <td class="text-center">
                                         <div class="list-icons">
@@ -74,7 +81,10 @@ null)
 
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a href="#" class="dropdown-item">
-                                                        @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                                                        @Html.ActionLink("Edit", "Edit", new
+                                                        {
+                                                            id = item.id
+                                                        })
                                                     </a>
                                                     <a href="#" class="dropdown-item">
                                                         @Html.ActionLink("Details", "Details", new
@@ -103,3 +113,4 @@ null)
         </div>
     </div>
 </div>
+

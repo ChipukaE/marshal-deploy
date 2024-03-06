@@ -1,4 +1,4 @@
-namespace marshal_deploy.Models
+﻿namespace marshal_deploy.Models
 {
     using System;
     using System.Collections.Generic;
@@ -6,23 +6,27 @@ namespace marshal_deploy.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("MonthlyTarget")]
-    public partial class MonthlyTarget
+    [Table("PrecinctMonthly")]
+    public partial class PrecinctMonthly
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MonthlyTarget()
-        {
-            MonthlyPerforms = new HashSet<MonthlyPerform>();
-        }
 
         public int id { get; set; }
 
-        public int? ShiftId { get; set; }
+        public int? PrecinctPerformanceId { get; set; }
 
-        [StringLength(50)]
-        public string UserId { get; set; }
+        public int? PrecinctId { get; set; }
 
-        public decimal? Target { get; set; }
+        public int? ClusterId { get; set; }
+
+        public int? ZoneId { get; set; }
+
+        public decimal? Collected { get; set; }
+
+        public decimal? Performance { get; set; }
+
+        public decimal? Variance { get; set; }
+
+        public int? Rating { get; set; }
 
         public DateTime? Audd { get; set; }
 
@@ -48,9 +52,11 @@ namespace marshal_deploy.Models
 
         public DateTime? UpdatedAt { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MonthlyPerform> MonthlyPerforms { get; set; }
+        public virtual Precinct Precinct { get; set; }
 
-        public virtual Shift Shift { get; set; }
+        public virtual Cluster Cluster { get; set; }
+
+        public virtual PrecinctPerformance PrecinctPerformance { get; set; }
+       
     }
 }

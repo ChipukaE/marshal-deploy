@@ -42,16 +42,7 @@
                             <tr>
 
                                 <th>@Html.DisplayNameFor(model => model.UserId)</th>
-                                <th>@Html.DisplayNameFor(model => model.TargetZW)</th>
-                                <th>@Html.DisplayNameFor(model => model.TargetUSD)</th>
-                                @*
-                    <th>@Html.DisplayNameFor(model => model.Audd)</th>
-                    <th>@Html.DisplayNameFor(model => model.Audu)</th>
-                    <th>@Html.DisplayNameFor(model => model.Audp)</th>
-                    <th>@Html.DisplayNameFor(model => model.lu_Audd)</th>
-                    <th>@Html.DisplayNameFor(model => model.lu_Audu)</th>
-                    <th>@Html.DisplayNameFor(model => model.lu_Audp)</th>
-                                *@
+                                <th>@Html.DisplayNameFor(model => model.Target)</th>
                                 <th>@Html.DisplayNameFor(model => model.IsDeleted)</th>
                                 <th>@Html.DisplayNameFor(model => model.IsActive)</th>
                                 <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
@@ -65,17 +56,8 @@
                                 <tr class="odd gradeX">
 
                                     <td>@Html.DisplayFor(modelItem => item.UserId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TargetZW)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TargetUSD)</td>
-                                    @*
-
-                        <td>@Html.DisplayFor(modelItem => item.Audd)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Audu)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Audp)</td>
-                        <td>@Html.DisplayFor(modelItem => item.lu_Audd)</td>
-                        <td>@Html.DisplayFor(modelItem => item.lu_Audu)</td>
-                        <td>@Html.DisplayFor(modelItem => item.lu_Audp)</td>
-                                    *@ @if (item.IsDeleted == true)
+                                    <td>@Html.DisplayFor(modelItem => item.Target)</td>
+                                    @if (item.IsDeleted == true)
                                     {
                                         <td class="hidden-phone">
                                             <span class="badge badge-flat border-success text-success-600 ml-2">Yes</span>

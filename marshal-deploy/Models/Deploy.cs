@@ -39,5 +39,7 @@ namespace marshal_deploy.Models
                 .WithOptional(e => e.Precinct1)
                 .HasForeignKey(e => e.PrecinctId);
         }
+
+        public System.Data.Entity.DbSet<marshal_deploy.Models.PrecinctMonthly> PrecinctMonthlies { get; set; }
     }
 }

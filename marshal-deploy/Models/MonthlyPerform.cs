@@ -16,21 +16,15 @@ namespace marshal_deploy.Models
         [StringLength(50)]
         public string UserId { get; set; }
 
+        public int? DailyPerformId { get; set; }
+
         public int? MonthlyTargetId { get; set; }
 
-        public decimal? MonthlyZW { get; set; }
+        public decimal? Target { get; set; }
 
-        public decimal? MonthlyUSD { get; set; }
+        public decimal? Collected { get; set; }
 
-        public decimal? CollectedZW { get; set; }
-
-        public decimal? CollectedUSD { get; set; }
-
-        public decimal? PerformanceZW { get; set; }
-
-        public decimal? PerformanceUSD { get; set; }
-
-        public decimal? Average { get; set; }
+        public decimal? Performance { get; set; }
 
         public int? Rating { get; set; }
 
@@ -61,6 +55,8 @@ namespace marshal_deploy.Models
         public DateTime? UpdatedAt { get; set; }
 
         public virtual Cluster Cluster { get; set; }
+
+        public virtual DailyPerform DailyPerform { get; set; }
 
         public virtual MonthlyTarget MonthlyTarget { get; set; }
 

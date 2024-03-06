@@ -43,7 +43,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,UserId,TargetZW,TargetUSD,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyTarget dailyTarget)
+        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,UserId,Target,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyTarget dailyTarget)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ShiftId,UserId,TargetZW,TargetUSD,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyTarget dailyTarget)
+        public ActionResult Edit([Bind(Include = "id,ShiftId,UserId,Target,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyTarget dailyTarget)
         {
             if (ModelState.IsValid)
             {
@@ -137,36 +137,6 @@ namespace marshal_deploy.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
-        //retrieving all users
-        // GET: /DailyTargets/FetchAllUserIds
-        public async Task<JsonResult> FetchAllUserIds() { 
-            var userIds = db.DailyTargets.Select(target => target.UserId).Distinct().ToList(); 
-            return Json(new { userIds = userIds }, JsonRequestBehavior.AllowGet); 
-        }
-
-
-        //retrieving targets
-        public async Task<ActionResult> FetchTargetValues(string userId)
-        {
-            var dailyTarget = db.DailyTargets.FirstOrDefault(t => t.UserId.Equals(userId));
-
-            if (dailyTarget != null)
-            {
-                var targetValues = new
-                {
-                    TargetZW = decimal.Round((decimal)dailyTarget.TargetZW, 2),
-                    TargetUSD = decimal.Round((decimal)dailyTarget.TargetUSD, 2)
-                };
-
-                return Json(targetValues, JsonRequestBehavior.AllowGet);
-            }
-
-            return Json(null, JsonRequestBehavior.AllowGet);
-        }
-
-
 
 
         protected override void Dispose(bool disposing)

@@ -19,13 +19,13 @@
         <table class="table datatable-responsive">
             <thead>
                 <tr>
-                    <th>PeriodType</th>
-                    <th>PrecinctId</th>
-                    <th>ClusterId</th>
+                    @*<th>PeriodType</th>*@
+                    <th>Precinct</th>
                     <th>ZoneId</th>
                     <th>Performance</th>
-                    @*<th>Variance</th>
-                    <th>Rating</th>*@
+                    @*<th>Variance</th>*@
+                    <th>Rating</th>
+                    <th>Cluster</th>
                     <th>IsDeleted</th>
                     <th>IsActive</th>
                     <th>CreatedAt</th>
@@ -37,15 +37,15 @@
                 @foreach (var precinctPerformance in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(model => precinctPerformance.Period.PeriodType)
-                        </td>
-                        <td>@Html.DisplayFor(model => precinctPerformance.PrecinctId)</td>
-                        <td>@Html.DisplayFor(model => precinctPerformance.ClusterId)</td>
+                        @* <td>
+            @Html.DisplayFor(model => precinctPerformance.Period.PeriodType)
+        </td>*@
+                        <td>@Html.DisplayFor(model => precinctPerformance.Precinct.PrecinctName)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.ZoneId)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.Performance)</td>
-                        @*<td>@Html.DisplayFor(model => precinctPerformance.Variance)</td>
-                        <td>@Html.DisplayFor(model => precinctPerformance.Rating)</td>*@
+                        @*<td>@Html.DisplayFor(model => precinctPerformance.Variance)</td>*@
+                        <td>@Html.DisplayFor(model => precinctPerformance.Rating)</td>
+                        <td>@Html.DisplayFor(model => precinctPerformance.Cluster.ClusterName)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.IsDeleted)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.IsActive)</td>
                         <td>@Html.DisplayFor(model => precinctPerformance.CreatedAt)</td>

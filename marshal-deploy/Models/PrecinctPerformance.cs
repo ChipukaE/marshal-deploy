@@ -27,6 +27,8 @@ namespace marshal_deploy.Models
 
         public int? PeriodId { get; set; }
 
+        public decimal? Total { get; set; }
+
         public decimal? Performance { get; set; }
 
         public decimal? Variance { get; set; }
@@ -57,15 +59,19 @@ namespace marshal_deploy.Models
 
         public DateTime? UpdatedAt { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Deployment> Deployments { get; set; }
-
         public virtual Period Period { get; set; }
 
         public virtual Precinct Precinct { get; set; }
 
         public virtual Precinct Precinct1 { get; set; }
 
+        public virtual Cluster Cluster { get; set; }
+
         public virtual Shift Shift { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Deployment> Deployments { get; set; }
+
+        
     }
 }

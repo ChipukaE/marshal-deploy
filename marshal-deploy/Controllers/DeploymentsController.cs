@@ -18,7 +18,7 @@ namespace marshal_deploy.Controllers
         // GET: Deployments
         public ActionResult Index()
         {
-            var deployments = db.Deployments.Include(d => d.DailyPerform).Include(d => d.PrecinctPerformance);
+            var deployments = db.Deployments.Include(d => d.DailyPerform).Include(d => d.Precinct).Include(p => p.Zone).Include(d => d.PrecinctPerformance);
             return View(deployments.ToList());
         }
 
@@ -33,11 +33,9 @@ namespace marshal_deploy.Controllers
         // GET: Deployments/Create
         public ActionResult Create()
         {
-            ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id");
             ViewBag.UserId = new SelectList(db.DailyPerforms, "id", "UserId");
-            ViewBag.PrecinctPerformanceId = new SelectList(db.PrecinctPerformances, "id", "id");
-            ViewBag.PrecinctId = new SelectList(db.PrecinctPerformances, "id", "PrecinctId");
-            ViewBag.ZoneId = new SelectList(db.PrecinctPerformances, "id", "ZoneId");
+            ViewBag.PrecinctId = new SelectList(db.Precincts, "id", "PrecinctName");
+            ViewBag.ZoneId = new SelectList(db.Zones, "id", "ZoneName");
             return View();
         }
 
@@ -81,11 +79,9 @@ namespace marshal_deploy.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ShiftId = new SelectList(db.DailyPerforms, "id", "id", deployment.ShiftId);
             ViewBag.UserId = new SelectList(db.DailyPerforms, "id", "UserId", deployment.UserId);
-            ViewBag.PrecinctPerformanceId = new SelectList(db.PrecinctPerformances, "id", "id", deployment.PrecinctPerformanceId);
-            ViewBag.PrecinctId = new SelectList(db.PrecinctPerformances, "id", "PrecinctId", deployment.PrecinctId);
-            ViewBag.ZoneId = new SelectList(db.PrecinctPerformances, "id", "ZoneId", deployment.ZoneId);
+            ViewBag.PrecinctId = new SelectList(db.Precincts, "id", "PrecinctName", deployment.PrecinctId);
+            ViewBag.ZoneId = new SelectList(db.Zones, "id", "ZoneName", deployment.ZoneId);
             return View(deployment);
         }
 
@@ -102,11 +98,9 @@ namespace marshal_deploy.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.ShiftId = new SelectList(db.DailyPerforms, "id", "id", deployment.ShiftId);
             ViewBag.UserId = new SelectList(db.DailyPerforms, "id", "UserId", deployment.DailyPerformId);
-            ViewBag.PrecinctPerformanceId = new SelectList(db.PrecinctPerformances, "id", "id", deployment.PrecinctPerformanceId);
-            ViewBag.PrecinctId = new SelectList(db.PrecinctPerformances, "id", "PrecinctId", deployment.PrecinctId);
-            ViewBag.ZoneId = new SelectList(db.PrecinctPerformances, "id", "ZoneId", deployment.ZoneId);
+            ViewBag.PrecinctId = new SelectList(db.Precincts, "id", "PrecinctId", deployment.PrecinctId);
+            ViewBag.ZoneId = new SelectList(db.Zones, "id", "ZoneName", deployment.ZoneId);
             return View(deployment);
         }
 
@@ -129,11 +123,9 @@ namespace marshal_deploy.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ShiftId = new SelectList(db.DailyPerforms, "id", "id", deployment.ShiftId);
             ViewBag.UserId = new SelectList(db.DailyPerforms, "id", "UserId", deployment.DailyPerformId);
-            ViewBag.PrecinctPerformanceId = new SelectList(db.PrecinctPerformances, "id", "id", deployment.PrecinctPerformanceId);
-            ViewBag.PrecinctId = new SelectList(db.PrecinctPerformances, "id", "PrecinctId", deployment.PrecinctId);
-            ViewBag.ZoneId = new SelectList(db.PrecinctPerformances, "id", "ZoneId", deployment.ZoneId);
+            ViewBag.PrecinctId = new SelectList(db.Precincts, "id", "PrecinctId", deployment.PrecinctId);
+            ViewBag.ZoneId = new SelectList(db.Zones, "id", "ZoneName", deployment.ZoneId);
             return View(deployment);
         }
 
@@ -173,4 +165,3 @@ namespace marshal_deploy.Controllers
         }
     }
 }
-

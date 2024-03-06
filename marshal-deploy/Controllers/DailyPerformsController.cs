@@ -46,7 +46,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,UserId,DailyTargetId,TargetZW,TargetUSD,TotalCountedZW,TotalCountedUSD,PerformanceZW,PerformanceUSD,Average,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyPerform dailyPerform)
+        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,UserId,DailyTargetId,Target,Total,Performance,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyPerform dailyPerform)
         {
             if (ModelState.IsValid)
             {
@@ -61,8 +61,7 @@ namespace marshal_deploy.Controllers
                     DailyPerform dailyPerform1 = new DailyPerform
                     {
                         UserId = userId,
-                        TargetZW = userTarget.TargetZW,
-                        TargetUSD = userTarget.TargetUSD,
+                        Target = userTarget.Target,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now,
                         IsDeleted = false,
@@ -72,18 +71,21 @@ namespace marshal_deploy.Controllers
                     var shift = shifts.FirstOrDefault(s => s.UserId == userId);
                     if (shift != null)
                     {
-                        dailyPerform1.TotalCountedZW = shift.TotalCountedZW;
-                        dailyPerform1.TotalCountedUSD = shift.TotalCountedUSD;
-
-                        dailyPerform1.PerformanceZW = (dailyPerform1.TotalCountedZW / dailyPerform1.TargetZW) * 100;
-                        dailyPerform1.PerformanceUSD = (dailyPerform1.TotalCountedUSD / dailyPerform1.TargetUSD) * 100;
-
-                        dailyPerform1.Average = (dailyPerform1.PerformanceZW + dailyPerform1.PerformanceUSD) / 2;
-
-                        dailyPerform1.Rating = CalculateRating(dailyPerform1.PerformanceZW, dailyPerform1.PerformanceUSD);
+                        dailyPerform1.Total = ((shift.TotalCollectedUSD - shift.CollectedEnforcementUSD)) + ((shift.TotalCollectedZW - shift.CollectedEnforcementZW) / 17300);
+                        dailyPerform1.Performance = (dailyPerform1.Total / userTarget.Target) * 100;
                     }
 
                     dailyPerforms.Add(dailyPerform1);
+                }
+
+                // Sort the dailyPerforms list based on the Average property in descending order
+                dailyPerforms = dailyPerforms.OrderByDescending(dp => dp.Performance).ToList();
+
+                // Assign ratings based on the index of each dailyPerform in the sorted list
+                for (int i = 0; i < dailyPerforms.Count; i++)
+                {
+                    dailyPerforms[i].Rating = i + 1;
+                    dailyPerforms[i].ClusterId = (i < 110) ? 1 : 3;
                 }
 
                 db.DailyPerforms.AddRange(dailyPerforms);
@@ -121,7 +123,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ShiftId,UserId,DailyTargetId,TargetZW,TargetUSD,TotalCountedZW,TotalCountedUSD,PerformanceZW,PerformanceUSD,Average,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyPerform dailyPerform)
+        public ActionResult Edit([Bind(Include = "id,ShiftId,UserId,DailyTargetId,Target,Total,Performance,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] DailyPerform dailyPerform)
         {
             if (ModelState.IsValid)
             {
@@ -135,7 +137,7 @@ namespace marshal_deploy.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName", dailyPerform.ClusterId);
-            ViewBag.UserId = new SelectList(db.DailyTargets, "id", "UserId", dailyPerform.UserId);
+            ViewBag.UserId = new SelectList(db.DailyTargets, "UserId", "UserId", dailyPerform.UserId);
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", dailyPerform.ShiftId);
             return View(dailyPerform);
         }
@@ -167,29 +169,7 @@ namespace marshal_deploy.Controllers
         }
 
 
-        private int CalculateRating(decimal? performanceZW, decimal? performanceUSD)
-        {
-            // Calculate the average of PerformanceZW and PerformanceUSD
-            decimal average = (performanceZW.GetValueOrDefault() + performanceUSD.GetValueOrDefault()) / 2;
-
-            // Retrieve all the existing averages from the database
-            var existingAverages = db.DailyPerforms
-                .Where(d => d.PerformanceZW.HasValue && d.PerformanceUSD.HasValue)
-                .Select(d => (d.PerformanceZW.Value + d.PerformanceUSD.Value) / 2)
-                .ToList();
-
-            // Sort the existing averages in descending order
-            existingAverages.Sort();
-            existingAverages.Reverse();
-
-            // Find the index of the average in the sorted list
-            var index = existingAverages.IndexOf(average);
-
-            // Assign the rating based on the index
-            var rating = index + 1;
-
-            return rating;
-        }
+        
 
         private int CalculateClusterId(int rating)
         {

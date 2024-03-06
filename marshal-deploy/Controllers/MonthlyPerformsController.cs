@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using marshal_deploy.Models;
@@ -17,7 +18,7 @@ namespace marshal_deploy.Controllers
         // GET: MonthlyPerforms
         public ActionResult Index()
         {
-            var monthlyPerforms = db.MonthlyPerforms.Include(m => m.Cluster).Include(m => m.MonthlyTarget).Include(m => m.Shift);
+            var monthlyPerforms = db.MonthlyPerforms.Include(m => m.Cluster).Include(m => m.DailyPerform).Include(m => m.MonthlyTarget).Include(m => m.Shift);
             return View(monthlyPerforms.ToList());
         }
 
@@ -33,9 +34,7 @@ namespace marshal_deploy.Controllers
         public ActionResult Create()
         {
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName");
-            ViewBag.MonthlyTargetId = new SelectList(db.MonthlyTargets, "id", "UserId");
-            ViewBag.MonthlyZW = new SelectList(db.MonthlyTargets, "id", "MonthlyZW");
-            ViewBag.MonthlyUSD = new SelectList(db.MonthlyTargets, "id", "MonthlyUSD");
+            ViewBag.UserId = new SelectList(db.MonthlyTargets, "UserId", "UserId");
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id");
 
             return View();
@@ -46,33 +45,58 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ShiftId,UserId,MonthlyTargetId,MonthlyZW,MonthlyUSD,CollectedZW,CollectedUSD,PerformanceZW,PerformanceUSD,Average,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] MonthlyPerform monthlyPerform)
+        public async Task<ActionResult> Create([Bind(Include = "id,ShiftId,UserId,DailyPerformId,MonthlyTargetId,Target,Collected,Performance,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] MonthlyPerform monthlyPerform)
         {
             if (ModelState.IsValid)
             {
-                monthlyPerform.CreatedAt = DateTime.Now;
-                monthlyPerform.UpdatedAt = DateTime.Now;
-                monthlyPerform.IsDeleted = false;
-                monthlyPerform.IsActive = true;
+                var userTargets = await db.MonthlyTargets.ToListAsync();
+                var dailyPerforms = await db.DailyPerforms.ToListAsync();
+                var monthlyPerforms = new List<MonthlyPerform>();
 
-                // Find the selected MonthlyTarget
-                MonthlyTarget selectedTarget = db.MonthlyTargets.Find(monthlyPerform.MonthlyTargetId);
-                if (selectedTarget != null)
+                foreach (var userTarget in userTargets)
                 {
-                    // Set MonthlyZW and MonthlyUSD based on the selected MonthlyTarget
-                    monthlyPerform.MonthlyZW = selectedTarget.MonthlyZW;
-                    monthlyPerform.MonthlyUSD = selectedTarget.MonthlyUSD;
+                    var userId = userTarget.UserId;
+
+                    // Retrieve daily performs for the current user for the past 30 days inclusively
+                    var startDate = DateTime.Now.Date.AddDays(-29); // Get the start date 30 days ago
+                    var userDailyPerforms = dailyPerforms.Where(dp => dp.UserId == userId && dp.CreatedAt >= startDate).ToList();
+
+                    // Calculate the collected value by summing the Total values
+                    var collected = userDailyPerforms.Sum(dp => dp.Total);
+
+                    // Calculate the average performance
+                    var performance = userDailyPerforms.Average(dp => dp.Performance);
+
+                    MonthlyPerform monthlyPerform1 = new MonthlyPerform
+                    {
+                        UserId = userId,
+                        Target = userTarget.Target,
+                        Collected = collected,
+                        Performance = performance,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        IsDeleted = false,
+                        IsActive = true
+                    };
+
+                    monthlyPerforms.Add(monthlyPerform1);
                 }
 
-                db.MonthlyPerforms.Add(monthlyPerform);
+                monthlyPerforms = monthlyPerforms.OrderByDescending(m => m.Performance).ToList();
+
+                for (int i = 0; i < monthlyPerforms.Count; i++)
+                {
+                    monthlyPerforms[i].Rating = i + 1;
+                    monthlyPerforms[i].ClusterId = (i < 110) ? 1 : 3;
+                }
+
+                db.MonthlyPerforms.AddRange(monthlyPerforms);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName", monthlyPerform.ClusterId);
-            ViewBag.MonthlyTargetId = new SelectList(db.MonthlyTargets, "id", "UserId", monthlyPerform.MonthlyTargetId);
-            ViewBag.MonthlyZW = new SelectList(db.MonthlyTargets, "id", "MonthlyZW", monthlyPerform.MonthlyZW);
-            ViewBag.MonthlyUSD = new SelectList(db.MonthlyTargets, "id", "MonthlyUSD", monthlyPerform.MonthlyUSD);
+            ViewBag.UserId = new SelectList(db.MonthlyTargets, "UserId", "UserId", monthlyPerform.UserId);
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", monthlyPerform.ShiftId);
             return View(monthlyPerform);
         }
@@ -90,9 +114,7 @@ namespace marshal_deploy.Controllers
                 return HttpNotFound();
             }
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName", monthlyPerform.ClusterId);
-            ViewBag.MonthlyTargetId = new SelectList(db.MonthlyTargets, "id", "UserId", monthlyPerform.MonthlyTargetId);
-            ViewBag.MonthlyZW = new SelectList(db.MonthlyTargets, "id", "MonthlyZW", monthlyPerform.MonthlyZW);
-            ViewBag.MonthlyUSD = new SelectList(db.MonthlyTargets, "id", "MonthlyUSD", monthlyPerform.MonthlyUSD);
+            ViewBag.UserId = new SelectList(db.MonthlyTargets, "UserId", "UserId", monthlyPerform.UserId);
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", monthlyPerform.ShiftId);
             return View(monthlyPerform);
         }
@@ -102,7 +124,7 @@ namespace marshal_deploy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ShiftId,UserId,MonthlyTargetId,MonthlyZW,MonthlyUSD,CollectedZW,CollectedUSD,PerformanceZW,PerformanceUSD,Average,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] MonthlyPerform monthlyPerform)
+        public ActionResult Edit([Bind(Include = "id,ShiftId,UserId,DailyPerformId,MonthlyTargetId,Target,Collected,Performance,Rating,ClusterId,Audd,Audu,Audp,lu_Audd,lu_Audu,lu_Audp,IsDeleted,IsActive,CreatedAt,UpdatedAt")] MonthlyPerform monthlyPerform)
         {
             if (ModelState.IsValid)
             {
@@ -116,9 +138,7 @@ namespace marshal_deploy.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ClusterId = new SelectList(db.Clusters, "id", "ClusterName", monthlyPerform.ClusterId);
-            ViewBag.MonthlyTargetId = new SelectList(db.MonthlyTargets, "id", "UserId", monthlyPerform.MonthlyTargetId);
-            ViewBag.MonthlyZW = new SelectList(db.MonthlyTargets, "id", "MonthlyZW", monthlyPerform.MonthlyZW);
-            ViewBag.MonthlyUSD = new SelectList(db.MonthlyTargets, "id", "MonthlyUSD", monthlyPerform.MonthlyUSD);
+            ViewBag.UserId = new SelectList(db.MonthlyTargets, "UserId", "UserId", monthlyPerform.UserId);
             ViewBag.ShiftId = new SelectList(db.Shifts, "id", "id", monthlyPerform.ShiftId);
             return View(monthlyPerform);
         }

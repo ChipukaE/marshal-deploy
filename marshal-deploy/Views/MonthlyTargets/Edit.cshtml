@@ -51,102 +51,23 @@
                         </div>
 
                         <div class="form-group col-4">
-                            @Html.LabelFor(model => model.MonthlyZW, htmlAttributes: new
+                            @Html.LabelFor(model => model.Target, htmlAttributes: new
                             {
                             @class = "control-label col-md-6"
                             })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.MonthlyZW, new
+                                @Html.EditorFor(model => model.Target, new
                                 {
                                     htmlAttributes =
                                 new { @class = "form-control" }
                                 })
-                                @Html.ValidationMessageFor(model => model.MonthlyZW, "", new
+                                @Html.ValidationMessageFor(model => model.Target, "", new
                                 {
                                 @class = "text-danger"
                                 })
                             </div>
                         </div>
 
-                        <div class="form-group col-4">
-                            @Html.LabelFor(model => model.MonthlyUSD, htmlAttributes: new
-                            {
-                            @class = "control-label col-md-6"
-                            })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.MonthlyUSD, new
-                                {
-                                    htmlAttributes =
-                                new { @class = "form-control" }
-                                })
-                                @Html.ValidationMessageFor(model => model.MonthlyUSD, "", new
-                                {
-                                @class = "text-danger"
-                                })
-                            </div>
-                        </div>
-
-                        @*
-        <div class="form-group col-4">
-          @Html.LabelFor(model => model.Audd, htmlAttributes: new { @class =
-          "control-label col-md-6" })
-          <div class="col-md-10">
-            @Html.EditorFor(model => model.Audd, new { htmlAttributes = new {
-            @class = "form-control" } }) @Html.ValidationMessageFor(model =>
-            model.Audd, "", new { @class = "text-danger" })
-          </div>
-        </div>
-
-        <div class="form-group col-4">
-          @Html.LabelFor(model => model.Audu, htmlAttributes: new { @class =
-          "control-label col-md-6" })
-          <div class="col-md-10">
-            @Html.EditorFor(model => model.Audu, new { htmlAttributes = new {
-            @class = "form-control" } }) @Html.ValidationMessageFor(model =>
-            model.Audu, "", new { @class = "text-danger" })
-          </div>
-        </div>
-
-        <div class="form-group col-4">
-          @Html.LabelFor(model => model.Audp, htmlAttributes: new { @class =
-          "control-label col-md-6" })
-          <div class="col-md-10">
-            @Html.EditorFor(model => model.Audp, new { htmlAttributes = new {
-            @class = "form-control" } }) @Html.ValidationMessageFor(model =>
-            model.Audp, "", new { @class = "text-danger" })
-          </div>
-        </div>
-
-        <div class="form-group col-4">
-          @Html.LabelFor(model => model.lu_Audd, htmlAttributes: new { @class
-          = "control-label col-md-6" })
-          <div class="col-md-10">
-            @Html.EditorFor(model => model.lu_Audd, new { htmlAttributes = new
-            { @class = "form-control" } }) @Html.ValidationMessageFor(model =>
-            model.lu_Audd, "", new { @class = "text-danger" })
-          </div>
-        </div>
-
-        <div class="form-group col-4">
-          @Html.LabelFor(model => model.lu_Audu, htmlAttributes: new { @class
-          = "control-label col-md-6" })
-          <div class="col-md-10">
-            @Html.EditorFor(model => model.lu_Audu, new { htmlAttributes = new
-            { @class = "form-control" } }) @Html.ValidationMessageFor(model =>
-            model.lu_Audu, "", new { @class = "text-danger" })
-          </div>
-        </div>
-
-        <div class="form-group col-4">
-          @Html.LabelFor(model => model.lu_Audp, htmlAttributes: new { @class
-          = "control-label col-md-6" })
-          <div class="col-md-10">
-            @Html.EditorFor(model => model.lu_Audp, new { htmlAttributes = new
-            { @class = "form-control" } }) @Html.ValidationMessageFor(model =>
-            model.lu_Audp, "", new { @class = "text-danger" })
-          </div>
-        </div>
-                        *@
 
                         <div class="form-group col-4">
                             @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new
@@ -181,36 +102,6 @@
                             </div>
                         </div>
 
-                        @*
-            <div class="form-group col-4">
-              @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new {
-              @class = "control-label col-md-6" })
-              <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes =
-                new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedAt, "", new {
-                @class = "text-danger" })
-              </div>
-            </div>
-
-
-        <div class="form-group col-4">
-            @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new
-            {
-            @class = "control-label col-md-6"
-            })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedAt, new
-                {
-                    htmlAttributes =
-                new { @class = "form-control" }
-                })
-                @Html.ValidationMessageFor(model => model.UpdatedAt, "", new
-                {
-                @class = "text-danger"
-                })
-            </div>
-        </div> *@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-success ml-3">

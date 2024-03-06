@@ -1,17 +1,9 @@
 ﻿@model IEnumerable<marshal_deploy.Models.Deployment>
-@{ ViewBag.Title = "Deployments"; } @if (TempData["ErrorMessage"] != null)
-{
-    <div id="notification" class="error">@TempData["ErrorMessage"]</div>
-}
+@{ ViewBag.Title = "Deployments"; }
+
+
 
 <style>
-    .error {
-        background-color: #ffdddd;
-        color: #ff0000;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
     .btn.btn-success a {
         color: white;
         text-decoration: none;
@@ -51,54 +43,42 @@
                         <thead>
                             <tr>
                                 <th>@Html.DisplayNameFor(model => model.UserId)</th>
-                                <th>@Html.DisplayNameFor(model => model.PrecinctId)</th>
-                                <th>@Html.DisplayNameFor(model => model.ZoneId)</th>
+                                <th>@Html.DisplayNameFor(model => model.Precinct.PrecinctName)</th>
+                                <th>@Html.DisplayNameFor(model => model.Zone.ZoneName)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr class="odd gradeX">
-                                    <td>@Html.DisplayFor(modelItem => item.UserId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.PrecinctId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.ZoneId)</td>
+                            @foreach (var item in Model) {
+                            <tr class="odd gradeX">
+                                <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Precinct.PrecinctName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Zone.ZoneName)</td>
 
-                                    <td class="text-center">
-                                        <div class="list-icons">
-                                            <div class="dropdown">
-                                                <a href="#"
-                                                   class="list-icons-item"
-                                                   data-toggle="dropdown">
-                                                    <i class="icon-menu9"></i>
+                                <td class="text-center">
+                                    <div class="list-icons">
+                                        <div class="dropdown">
+                                            <a href="#"
+                                               class="list-icons-item"
+                                               data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="#" class="dropdown-item">
+                                                    @Html.ActionLink("Edit", "Edit", new { id = item.id });
                                                 </a>
-
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item">
-                                                        @Html.ActionLink("Edit", "Edit", new
-                                                        {
-                                                            id = item.id
-                                                        })
-                                                    </a>
-                                                    <a href="#" class="dropdown-item">
-                                                        @Html.ActionLink("Details", "Details", new
-                                                        {
-                                                            id =
-                                                        item.id
-                                                        })
-                                                    </a>
-                                                    <a href="#" class="dropdown-item">
-                                                        @Html.ActionLink("Delete", "Delete", new
-                                                        {
-                                                            id =
-                                                        item.id
-                                                        })
-                                                    </a>
-                                                </div>
+                                                <a href="#" class="dropdown-item">
+                                                    @Html.ActionLink("Details", "Details", new { id = item.id });
+                                                </a>
+                                                <a href="#" class="dropdown-item">
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.id });
+                                                </a>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            }
+                                    </div>
+                                </td>
+                            </tr>
+                                                                                    }
                         </tbody>
                     </table>
                 </div>
@@ -115,4 +95,3 @@
 
 <script src="~/Content/global_assets/js/demo_pages/datatables_responsive.js"></script>
 }
-
